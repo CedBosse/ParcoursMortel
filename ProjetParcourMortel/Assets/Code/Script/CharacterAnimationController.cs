@@ -20,7 +20,7 @@ public class CharacterAnimationController : MonoBehaviour
     {
         if(animator == null)
         {
-            Debug.LogWarning("no valid animator");
+           // Debug.LogWarning("no valid animator");
         }
 
         animator.SetFloat("Velocity", character.getVelocity());

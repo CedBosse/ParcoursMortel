@@ -14,11 +14,13 @@ public class RunnerComponent : MonoBehaviour
     }
     void Update()
     {
-        if(Vector3.Distance(player.position, transform.position) < 10)//distance bidon
+        if(Vector3.Distance(player.position, transform.position) < 50)//distance bidon
         {
             animator.SetBool("isPlayerNear", true);
             Direction = (player.position - transform.position).normalized;
-            transform.position += Direction * 50 * Time.deltaTime;
+            transform.position += Direction * 10 * Time.deltaTime;
+            transform.LookAt(player);
+            //Quaternion.LookRotation(player.position, transform.position);//
         }
         else
             animator.SetBool("isPlayerNear", false);
