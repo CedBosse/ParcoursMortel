@@ -6,7 +6,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     private Quaternion camRotation;
-    public float camSensitivity = 1;
+    public float camSensitivity = 5;
     public float lookUpMax = 60;
     public float lookUpMin = -60;
     // Start is called before the first frame update

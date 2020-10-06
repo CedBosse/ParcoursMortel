@@ -62,7 +62,19 @@ public class Character : MonoBehaviour
     } 
     public float getVelocity()
     {
-        Debug.Log(velocity.magnitude);
-        return velocity.magnitude;
+        Debug.Log(characterMovement.Velocity.magnitude);
+        return characterMovement.Velocity.magnitude;
+    }
+
+    public void ToggleRun()
+    {
+        if (characterMovement.GetMovementMode() != MovementMode.Running)
+        {
+            characterMovement.setMovementMode(MovementMode.Running);
+        }
+        else
+        {
+            characterMovement.setMovementMode(MovementMode.Walking);
+        }
     }
 }

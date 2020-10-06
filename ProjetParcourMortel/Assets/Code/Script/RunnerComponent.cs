@@ -18,7 +18,7 @@ public class RunnerComponent : MonoBehaviour
         {
             animator.SetBool("isPlayerNear", true);
             Direction = (player.position - transform.position).normalized;
-            transform.position += Direction * 10 * Time.deltaTime;
+            transform.position += Direction * 8 * Time.deltaTime;
             transform.LookAt(player);
             //Quaternion.LookRotation(player.position, transform.position);//
         }
