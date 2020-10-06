@@ -25,5 +25,10 @@ public class PlayerInput : MonoBehaviour
         {
             character.ToggleRun();
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            character.Jump();
+        }
     }
 }

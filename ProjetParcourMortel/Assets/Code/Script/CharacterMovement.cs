@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -14,8 +15,11 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 velocity;
     public Transform t_mesh;
     public float maxSpeed;
+   
     private float smoothSpeed;
     private float rotationMultiplier = 10;
+    
+    public float jumpForce = 100;
 
     private Rigidbody rigidbody;
 
@@ -47,6 +51,11 @@ public class CharacterMovement : MonoBehaviour
     }
     
     public Vector3 Velocity { get => rigidbody.velocity; set => velocity = value; }
+
+    public void Jump()
+    {
+        rigidbody.AddForce(Vector3.up * jumpForce);
+    }
 
     public void setMovementMode(MovementMode mode)
     {

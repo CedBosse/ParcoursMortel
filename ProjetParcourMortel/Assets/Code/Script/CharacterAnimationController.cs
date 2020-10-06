@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,5 +25,10 @@ public class CharacterAnimationController : MonoBehaviour
         }
 
         animator.SetFloat("Velocity", character.getVelocity());
+    }
+
+    public void Jump()
+    {
+        animator.SetTrigger("Jump");
     }
 }

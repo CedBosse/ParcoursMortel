@@ -17,6 +17,7 @@ public class Character : MonoBehaviour
 
     public CameraController cameraController;
     public CharacterMovement characterMovement;
+    public CharacterAnimationController characterAnimation;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,7 +60,14 @@ public class Character : MonoBehaviour
         
         characterMovement.Velocity = translation;
 
-    } 
+    }
+
+    public void Jump()
+    {
+        characterMovement.Jump();
+        characterAnimation.Jump();
+    }
+
     public float getVelocity()
     {
         Debug.Log(characterMovement.Velocity.magnitude);
