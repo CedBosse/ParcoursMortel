@@ -30,5 +30,10 @@ public class PlayerInput : MonoBehaviour
         {
             character.Jump();
         }
+
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            character.Swing();
+        }
     }
 }

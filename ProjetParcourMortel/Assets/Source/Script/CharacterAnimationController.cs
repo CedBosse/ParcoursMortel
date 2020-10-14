@@ -18,8 +18,9 @@ public class CharacterAnimationController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if(animator == null)
+    {      
+
+        if (animator == null)
         {
            // Debug.LogWarning("no valid animator");
         }
@@ -30,5 +31,10 @@ public class CharacterAnimationController : MonoBehaviour
     public void Jump()
     {
         animator.SetTrigger("Jump");
+    }
+
+    public void Swing()
+    {
+        animator.SetTrigger("Swing");
     }
 }

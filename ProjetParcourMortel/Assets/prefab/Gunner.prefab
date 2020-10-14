@@ -957,9 +957,10 @@ GameObject:
   - component: {fileID: 2325141797093612815}
   - component: {fileID: 2868275471152576043}
   - component: {fileID: 6744703700158892247}
+  - component: {fileID: -8460084597048295297}
   m_Layer: 0
-  m_Name: Gunner 1
-  m_TagString: Untagged
+  m_Name: Gunner
+  m_TagString: Ennemi
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -972,7 +973,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3102769628365834165}
   m_LocalRotation: {x: -0, y: 0.993518, z: -0, w: -0.11367495}
-  m_LocalPosition: {x: -4.89, y: 0, z: 9.22}
+  m_LocalPosition: {x: -4.871, y: 0, z: 9.303}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5089506224123331954}
@@ -1012,6 +1013,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d616f07326e41db46881524ea197a8c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &-8460084597048295297
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3102769628365834165}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.31332046
+  m_Height: 2.1898603
+  m_Direction: 1
+  m_Center: {x: -0.031718966, y: 0.86023545, z: -0.0426898}
 --- !u!1 &3462799392301976175
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ public class Character : MonoBehaviour
     public CharacterMovement characterMovement;
     public CharacterAnimationController characterAnimation;
     // Start is called before the first frame update
-    void Start()
+  /*  void Start()
     {
         
     }
@@ -29,7 +29,7 @@ public class Character : MonoBehaviour
         //cameraController = GetComponentInChildren<CameraController>();
     }
 
-
+    */
 
     // Update is called once per frame
     void Update()
@@ -68,9 +68,14 @@ public class Character : MonoBehaviour
         characterAnimation.Jump();
     }
 
+    public void Swing()
+    {
+        characterAnimation.Swing();
+    }
+
     public float getVelocity()
     {
-        Debug.Log(characterMovement.Velocity.magnitude);
+        //Debug.Log(characterMovement.Velocity.magnitude);
         return characterMovement.Velocity.magnitude;
     }
 
