@@ -5,6 +5,7 @@ using UnityEngine;
 public class GrabWeaponComponent : MonoBehaviour
 {
     public GameObject sword;
+    public GameObject rightHand; 
     // Start is called before the first frame update
     void Awake()
     {

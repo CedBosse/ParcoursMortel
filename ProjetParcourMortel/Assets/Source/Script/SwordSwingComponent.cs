@@ -6,7 +6,9 @@ public class SwordSwingComponent : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        if (gameObject.tag == "Player" && collision.gameObject.tag == "Ennemi")
+        Debug.Log(gameObject.tag);
+       /* Debug.Log(collision.gameObject.tag);
+        if (gameObject.tag == "Sword" && collision.gameObject.tag == "Ennemi")
         {
             collision.gameObject.SetActive(false);
             Debug.Log("Ennemy touched");
@@ -15,6 +17,6 @@ public class SwordSwingComponent : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
             Debug.Log("Player touched");
-        }
+        }*/
     }
 }

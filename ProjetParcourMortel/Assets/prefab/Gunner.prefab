@@ -958,6 +958,7 @@ GameObject:
   - component: {fileID: 2868275471152576043}
   - component: {fileID: 6744703700158892247}
   - component: {fileID: -8460084597048295297}
+  - component: {fileID: 2442051675933831291}
   m_Layer: 0
   m_Name: Gunner
   m_TagString: Ennemi
@@ -1027,6 +1028,22 @@ CapsuleCollider:
   m_Height: 2.1898603
   m_Direction: 1
   m_Center: {x: -0.031718966, y: 0.86023545, z: -0.0426898}
+--- !u!54 &2442051675933831291
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3102769628365834165}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3462799392301976175
 GameObject:
   m_ObjectHideFlags: 0
