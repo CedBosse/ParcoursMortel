@@ -222,6 +222,53 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a32f85d47d2d26e489da3a9d090801f8, type: 3}
+--- !u!1 &217207891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 217207893}
+  - component: {fileID: 217207892}
+  m_Layer: 0
+  m_Name: GunnerBulletPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &217207892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217207891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 982f5e4fe4a6d394bab1edd83357aa11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToPool: {fileID: 1325836922669442, guid: eddd5dbbd5cba0343953e804ef2e05c8,
+    type: 3}
+  poolSize: 20
+  isReady: 0
+--- !u!4 &217207893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217207891}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.690568, y: 1.4871709, z: 9.430323}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &225323295
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,6 +735,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gunner
       objectReference: {fileID: 0}
+    - target: {fileID: 5769744266390405287, guid: dcc937587bc95b0439e8c34e78490291,
+        type: 3}
+      propertyPath: projectileObjectPool
+      value: 
+      objectReference: {fileID: 217207892}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dcc937587bc95b0439e8c34e78490291, type: 3}
 --- !u!1 &705507993
