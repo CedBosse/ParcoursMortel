@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class SwordSwingComponent : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    public GameObject owner;
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(gameObject.tag);
-       /* Debug.Log(collision.gameObject.tag);
-        if (gameObject.tag == "Sword" && collision.gameObject.tag == "Ennemi")
-        {
-            collision.gameObject.SetActive(false);
-            Debug.Log("Ennemy touched");
-        }         
-        else if (gameObject.tag == "Ennemi" && collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.SetActive(false);
-            Debug.Log("Player touched");
-        }*/
+        if (owner.gameObject.tag == "Player" && other.gameObject.tag == "Ennemi")
+            other.gameObject.SetActive(false);
+        else if(owner.gameObject.tag == "Ennemi" && other.gameObject.tag == "Player")
+            other.gameObject.SetActive(false);
     }
 }
