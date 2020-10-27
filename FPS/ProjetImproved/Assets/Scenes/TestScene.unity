@@ -130,13 +130,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1171400609841010373, guid: 6ed43ebe17646de4a89fd4bf8b85d8e5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 13.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171400609841010374, guid: 6ed43ebe17646de4a89fd4bf8b85d8e5, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5d0c20563bfc25d47bd8a1816260f0ae, type: 2}
+    - target: {fileID: 1171400609841010374, guid: 6ed43ebe17646de4a89fd4bf8b85d8e5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5d0c20563bfc25d47bd8a1816260f0ae, type: 2}
     - target: {fileID: 2113852313227106446, guid: 6ed43ebe17646de4a89fd4bf8b85d8e5, type: 3}
       propertyPath: moveSpeed
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2113852313227106446, guid: 6ed43ebe17646de4a89fd4bf8b85d8e5, type: 3}
       propertyPath: sprintSpeed
-      value: 15
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2523517983149138060, guid: 6ed43ebe17646de4a89fd4bf8b85d8e5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4098445160758745892, guid: 6ed43ebe17646de4a89fd4bf8b85d8e5, type: 3}
       propertyPath: m_IsActive
@@ -786,9 +802,17 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: -4565884009001823619, guid: 7ecb84ca373991149a2337ee1949a905, type: 3}
+    - target: {fileID: 4098445160798692264, guid: 6ed43ebe17646de4a89fd4bf8b85d8e5, type: 3}
+      propertyPath: m_TagString
+      value: Main
+      objectReference: {fileID: 0}
     - target: {fileID: 4098445160798692266, guid: 6ed43ebe17646de4a89fd4bf8b85d8e5, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 1079
+      objectReference: {fileID: 0}
+    - target: {fileID: 4098445160798692266, guid: 6ed43ebe17646de4a89fd4bf8b85d8e5, type: 3}
+      propertyPath: field of view
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4098445160874468160, guid: 6ed43ebe17646de4a89fd4bf8b85d8e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1242,6 +1266,10 @@ PrefabInstance:
       propertyPath: speed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 8394092522297065315, guid: 6ed43ebe17646de4a89fd4bf8b85d8e5, type: 3}
+      propertyPath: debugHitPointTransform
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ed43ebe17646de4a89fd4bf8b85d8e5, type: 3}
 --- !u!1 &225323295
@@ -1458,7 +1486,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315005220}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a081188642a33804ba0cca871d0c6de8, type: 3}
@@ -1575,7 +1603,7 @@ GameObject:
   - component: {fileID: 379982599}
   m_Layer: 0
   m_Name: GrapplePoint
-  m_TagString: Untagged
+  m_TagString: GrapPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1670,7 +1698,7 @@ GameObject:
   - component: {fileID: 514388076}
   m_Layer: 0
   m_Name: GrapplePoint3
-  m_TagString: Untagged
+  m_TagString: GrapPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2849,7 +2877,7 @@ GameObject:
   - component: {fileID: 1758251887}
   m_Layer: 0
   m_Name: GrapplePoint2
-  m_TagString: Untagged
+  m_TagString: GrapPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3229,6 +3257,10 @@ PrefabInstance:
     - target: {fileID: 3658101943344851404, guid: ae172262a5c32d7449349f006360c332, type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658101943344851404, guid: ae172262a5c32d7449349f006360c332, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4147781148854727542, guid: ae172262a5c32d7449349f006360c332, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4063,6 +4095,10 @@ PrefabInstance:
     - target: {fileID: 5676158201153885052, guid: 898fd7b19494a814795ea4c62011e15b, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676158201153885052, guid: 898fd7b19494a814795ea4c62011e15b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5797083959240418753, guid: 898fd7b19494a814795ea4c62011e15b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

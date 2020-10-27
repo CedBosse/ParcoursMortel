@@ -11,6 +11,8 @@ TagManager:
   - Enemy
   - Ennemi
   - Weapon
+  - Main
+  - GrapPoint
   layers:
   - Default
   - TransparentFX
