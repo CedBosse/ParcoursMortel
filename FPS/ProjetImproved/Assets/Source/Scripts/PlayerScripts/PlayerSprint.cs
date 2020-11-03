@@ -26,7 +26,7 @@ public class PlayerSprint : MonoBehaviour
     {
         if (!toggle)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.LeftShift) && playerMovement.GetComponent<CharacterController>().isGrounded)
             {
                playerMovement.speed = sprintSpeed;
             }
@@ -37,7 +37,7 @@ public class PlayerSprint : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.LeftShift) && playerMovement.GetComponent<CharacterController>().isGrounded)
             {
                 if (playerMovement.speed == moveSpeed)
                     playerMovement.speed = sprintSpeed;

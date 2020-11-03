@@ -14,6 +14,7 @@ public class PlayerAttack : MonoBehaviour
     private bool zoomed;
 
     private Camera mainCam;
+    private Camera fCamera;
 
     private GameObject crosshair;
 
@@ -22,6 +23,7 @@ public class PlayerAttack : MonoBehaviour
         weaponManager = GetComponent<WeaponManager>();
 
         zoomCameraAnim = transform.Find(Tags.LOOK_ROOT).transform.Find(Tags.ZOOM_CAMERA).GetComponent<Animator>();
+        fCamera = transform.Find(Tags.LOOK_ROOT).transform.Find(Tags.ZOOM_CAMERA).GetComponent<Camera>();
 
         crosshair = GameObject.FindWithTag(Tags.CROSSHAIR);
 
@@ -49,6 +51,10 @@ public class PlayerAttack : MonoBehaviour
                 nextTimeToFire = Time.time + 1f / fireRate;
 
                 weaponManager.GetCurrentSelectedWeapon().ShootAnimation();
+                if (Physics.Raycast(fCamera.transform.position, fCamera.transform.forward, out RaycastHit raycastHit) && raycastHit.transform.tag == "Enemy")
+                {
+                    raycastHit.transform.gameObject.SetActive(false);
+                }
 
                 //BulletFired();
             }
@@ -64,6 +70,10 @@ public class PlayerAttack : MonoBehaviour
                 if(weaponManager.GetCurrentSelectedWeapon().bulletType == WeaponBulletType.BULLET)
                 {
                     weaponManager.GetCurrentSelectedWeapon().ShootAnimation();
+                    if (Physics.Raycast(fCamera.transform.position, fCamera.transform.forward, out RaycastHit raycastHit) && raycastHit.transform.tag == "Enemy")
+                    {
+                        raycastHit.transform.gameObject.SetActive(false);
+                    }
                     //BulletFired();
                 }
                 

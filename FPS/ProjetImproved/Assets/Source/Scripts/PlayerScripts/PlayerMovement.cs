@@ -9,9 +9,9 @@ public class PlayerMovement : MonoBehaviour
     private const float NORMAL_FOV = 60f;
     private const float HOOKSHOT_FOV = 100f;
 
-    private Rigidbody rb;
     public Transform orientation;
     bool allowDashForceCounter;
+
 
     [SerializeField] private Transform hookshotTransform;
 
@@ -35,8 +35,8 @@ public class PlayerMovement : MonoBehaviour
 
     public LayerMask whatIsWall;
     public float wallrunForce, maxWallrunTime, maxWallSpeed;
-    bool isWallRight, isWallLeft;
-    bool isWallRunning;
+    public bool isWallRight, isWallLeft;
+    public bool isWallRunning;
     public float maxWallRunCameraTilt, wallRunCameraTilt;
 
     private enum State { Normal, HookshotThrown, HookshotFlyingPlayer }
@@ -46,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         fCamera = transform.Find(Tags.LOOK_ROOT).transform.Find(Tags.ZOOM_CAMERA).GetComponent<Camera>();
         cameraFov = mainCamera.GetComponent<CameraFov>();
-        rb = GetComponent<Rigidbody>();
 
         state = State.Normal;
         hookshotTransform.gameObject.SetActive(false);
@@ -119,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
 
     void PlayerJump()
     {
-        if ((characterController.isGrounded || isWallRunning) && TestInputDownJump())
+        if (characterController.isGrounded && TestInputDownJump())
         {
             verticalVelocity = jumpForce;
         }
@@ -129,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (TestInputDownHookshot())
         {
-            if (Physics.Raycast(fCamera.transform.position, fCamera.transform.forward, out RaycastHit raycastHit) && Vector3.Distance(transform.position, raycastHit.point) <= 40f && raycastHit.transform.tag == "GrapPoint")
+            if (Physics.Raycast(fCamera.transform.position, fCamera.transform.forward, out RaycastHit raycastHit) && Vector3.Distance(transform.position, raycastHit.point) <= 30f && raycastHit.transform.tag == "GrapPoint")
             {
                 Debug.Log(Vector3.Distance(transform.position, raycastHit.point));
                 hookshotPosition = raycastHit.point;
@@ -182,7 +181,7 @@ public class PlayerMovement : MonoBehaviour
         if (TestInputDownJump())
         {
             float momentumExtraSpeed = 0.0075f;
-            float jumpSpeed = 0.075f;
+            float jumpSpeed = 0.08f;
             characterVelocityMomentum = hookshotDir * hookshotSpeed * momentumExtraSpeed;
             characterVelocityMomentum += Vector3.up * jumpSpeed;
             StopHookshot();
@@ -205,15 +204,13 @@ public class PlayerMovement : MonoBehaviour
         return Input.GetKeyDown(KeyCode.Space);
     }
 
-    private void WallRunInput() //make sure to call in void Update
+    private void WallRunInput()
     {
-        //Wallrun
         if (Input.GetKey(KeyCode.W) && isWallRight)
             StartWallrun();
 
         if (Input.GetKey(KeyCode.W) && isWallLeft)
             StartWallrun();
-
     }
 
 
@@ -223,31 +220,34 @@ public class PlayerMovement : MonoBehaviour
         ResetGravity();
         isWallRunning = true;
         allowDashForceCounter = false;
-        speed = 20;
+        speed = 15;
+        float wallJump = 0.05f;
+      
 
         if (moveDirection.magnitude <= maxWallSpeed)
         {
-            //Make sure char sticks to wall
             if (isWallRight)
             {
                 if (TestInputDownJump())
                 {
-                    jumpForce = 50f;
-                    ApplyGravity();
-                }
+                    characterVelocityMomentum += (-orientation.right + (Vector3.up)) * wallJump;
+                    StopWallRun();
 
-
-                else
-                {
-                    moveDirection = transform.TransformDirection(moveDirection);
-                    moveDirection = orientation.right * wallrunForce / 5 * Time.deltaTime;
                 }
+                moveDirection = transform.TransformDirection(moveDirection);
+                moveDirection = orientation.right * wallrunForce / 5 * Time.deltaTime;
 
 
             }
 
             else
             {
+                if (TestInputDownJump())
+                {
+                    characterVelocityMomentum += (orientation.right + Vector3.up) * wallJump;
+                    StopWallRun();
+
+                }
                 moveDirection = transform.TransformDirection(moveDirection);
                 moveDirection = -orientation.right * wallrunForce / 5 * Time.deltaTime;
             }
@@ -263,17 +263,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isWallRunning = false;
-        rb.useGravity = true;
 
     }
-    private void CheckForWall() //make sure to call in void Update
+    private void CheckForWall() 
     {
         isWallRight = Physics.Raycast(transform.position, orientation.right, 1f, whatIsWall);
         isWallLeft = Physics.Raycast(transform.position, -orientation.right, 1f, whatIsWall);
 
-        //leave wall run
         if (!isWallLeft && !isWallRight) StopWallRun();
-        //reset double jump (if you have one :D)
-        //if (isWallLeft || isWallRight) doubleJumpsLeft = startDoubleJumps;
     }
 }
