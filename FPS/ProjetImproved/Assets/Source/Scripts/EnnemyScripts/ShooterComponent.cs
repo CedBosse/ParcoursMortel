@@ -8,7 +8,9 @@ public class ShooterComponent : MonoBehaviour
     private Animator animator;
     private float time;
     private ProjectileShooterComponent gun;
-    // Start is called before the first frame update
+    private Transform target;
+
+
     void Awake()
     {
         gun = GameObject.FindGameObjectsWithTag("Weapon")[0].GetComponent<ProjectileShooterComponent>();
@@ -16,13 +18,15 @@ public class ShooterComponent : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
-    {
+    {      
         time += Time.deltaTime;
-        if (Vector3.Distance(player.position, transform.position) < 50)//distance bidon
+        if (Vector3.Distance(player.position, transform.position) < 50)
         {
-            transform.LookAt(player);
+            var rotation = Quaternion.LookRotation(player.transform.position - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * time);
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+
             if (time >= 1)
             {
                 animator.SetBool("isShooting", true);
@@ -33,5 +37,7 @@ public class ShooterComponent : MonoBehaviour
             else
                 animator.SetBool("isShooting", false);
         }
+        else
+            animator.SetBool("isShooting", false);
     }
 }

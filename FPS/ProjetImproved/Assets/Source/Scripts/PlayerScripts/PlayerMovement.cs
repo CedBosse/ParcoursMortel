@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using System.Diagnostics;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -34,11 +37,13 @@ public class PlayerMovement : MonoBehaviour
     private CameraFov cameraFov;
 
     public LayerMask whatIsWall;
+    public LayerMask terrain;
     public float wallrunForce, maxWallrunTime, maxWallSpeed;
     public bool isWallRight, isWallLeft;
     public bool isWallRunning;
     public float maxWallRunCameraTilt, wallRunCameraTilt;
 
+    private bool isTouchingGround;
     private enum State { Normal, HookshotThrown, HookshotFlyingPlayer }
 
     private void Awake()
@@ -52,11 +57,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
         switch (state)
         {
             default:
             case State.Normal:
+                CheckIfDead();
                 MoveThePlayer();
                 WallRunInput();
                 CheckForWall();
@@ -73,7 +79,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+    private void CheckIfDead()
+    {
+        isTouchingGround = Physics.Raycast(transform.position, -orientation.up, 1f, terrain);
 
+        if (isTouchingGround)
+        {            
+            SceneManager.LoadScene(0);
+        }               
+    }
     void MoveThePlayer()
     {
         moveDirection = new Vector3(Input.GetAxis(Axis.HORIZONTAL), 0f, Input.GetAxis(Axis.VERTICAL));
@@ -130,7 +144,6 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Physics.Raycast(fCamera.transform.position, fCamera.transform.forward, out RaycastHit raycastHit) && Vector3.Distance(transform.position, raycastHit.point) <= 30f && raycastHit.transform.tag == "GrapPoint")
             {
-                Debug.Log(Vector3.Distance(transform.position, raycastHit.point));
                 hookshotPosition = raycastHit.point;
                 hookshotSize = 0f;
                 hookshotTransform.gameObject.SetActive(true);
@@ -269,7 +282,14 @@ public class PlayerMovement : MonoBehaviour
     {
         isWallRight = Physics.Raycast(transform.position, orientation.right, 1f, whatIsWall);
         isWallLeft = Physics.Raycast(transform.position, -orientation.right, 1f, whatIsWall);
-
+        
         if (!isWallLeft && !isWallRight) StopWallRun();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        UnityEngine.Debug.Log(other.gameObject.tag);
+        if (other.gameObject.tag == "Ground")
+            SceneManager.LoadScene(4);
     }
 }

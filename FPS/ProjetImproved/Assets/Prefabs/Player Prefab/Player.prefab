@@ -519,7 +519,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 5175
+    m_Bits: 13367
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -627,6 +627,9 @@ MonoBehaviour:
   whatIsWall:
     serializedVersion: 2
     m_Bits: 4096
+  terrain:
+    serializedVersion: 2
+    m_Bits: 8192
   wallrunForce: 10
   maxWallrunTime: 2
   maxWallSpeed: 20
