@@ -18,24 +18,6 @@ public class Character : MonoBehaviour
     public CameraController cameraController;
     public CharacterMovement characterMovement;
     public CharacterAnimationController characterAnimation;
-    // Start is called before the first frame update
-  /*  void Start()
-    {
-        
-    }
-
-    void Awake()
-    {
-        //cameraController = GetComponentInChildren<CameraController>();
-    }
-
-    */
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void AddMovementInput(float forward, float right)
     {
