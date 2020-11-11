@@ -13,7 +13,7 @@ public class NPCMove : MonoBehaviour
 
     void Awake()
     {
-        _navMeshAgent = this.GetComponent<NavMeshAgent>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
         if (_navMeshAgent == null)
             Debug.Log("Nav is broken");
         else
@@ -33,6 +33,9 @@ public class NPCMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        if (_navMeshAgent == null)
+            Debug.Log("Nav is broken");
+        else
+            SetDestination(); SetDestination();
     }
 }
