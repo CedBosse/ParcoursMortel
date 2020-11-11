@@ -3,17 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Character))]
+[RequireComponent(typeof(Charact))]
 public class CharacterAnimationController : MonoBehaviour
 {
 
     public Animator animator;
-    private Character character;
+    private Charact character;
 
     // Start is called before the first frame update
     void Start()
     {
-        character = GetComponent<Character>();
+        character = GetComponent<Charact>();
     }
 
     // Update is called once per frame
@@ -22,19 +22,17 @@ public class CharacterAnimationController : MonoBehaviour
 
         if (animator == null)
         {
-           // Debug.LogWarning("no valid animator");
+            Debug.LogWarning("no valid animator");
+            return;
         }
 
         animator.SetFloat("Velocity", character.getVelocity());
+        Debug.Log(character.getVelocity());
     }
-
     public void Jump()
     {
         animator.SetTrigger("Jump");
     }
 
-    public void Swing()
-    {
-        animator.SetTrigger("Swing");
-    }
+
 }
