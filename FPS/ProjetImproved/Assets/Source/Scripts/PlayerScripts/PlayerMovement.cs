@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     public Transform orientation;
     bool allowDashForceCounter;
 
+    public Animator transition;
+    public float transitionTime = 1f;
+
 
     [SerializeField] private Transform hookshotTransform;
 
@@ -83,9 +86,16 @@ public class PlayerMovement : MonoBehaviour
     {
         isTouchingGround = Physics.Raycast(transform.position, -orientation.up, 1f, terrain);
 
+        IEnumerator LoadLevel(int sceneNumber)
+        {
+            transition.SetTrigger("Start");
+            yield return new WaitForSeconds(transitionTime);
+            SceneManager.LoadScene(sceneNumber);
+        }
+
         if (isTouchingGround)
-        {            
-            SceneManager.LoadScene(0);
+        {
+            StartCoroutine(LoadLevel(4));
         }               
     }
     void MoveThePlayer()

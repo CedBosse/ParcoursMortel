@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class GameOverTransition : MonoBehaviour
 {
     public Animator transition;
     public float transitionTime = 1f;
-    IEnumerator LoadLevel()
+    IEnumerator LoadLevel(int sceneNumber)
     {
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene(2);
-    }
-    public void Play()
-    {
-        StartCoroutine(LoadLevel());
+        SceneManager.LoadScene(sceneNumber);
     }
 
-    public void Quit()
+    public void Recommencer()
     {
-        Debug.Log("Quit");
-        Application.Quit();      
+        StartCoroutine(LoadLevel(2));
+    }
+
+    public void MainMenu()
+    {
+        StartCoroutine(LoadLevel(0));
     }
 }
