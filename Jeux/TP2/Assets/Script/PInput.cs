@@ -18,7 +18,7 @@ public class PInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        character.AddMovementInput(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
+        character.AddMovementInput(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));       
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {

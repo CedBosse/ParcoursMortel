@@ -24,6 +24,7 @@ public class Charact : MonoBehaviour
     void Update()
     {
         //transform.Translate(velocity * Time.deltaTime);
+        CheckStamina();
     }
     public void AddMovementInput(float forward, float right)
     {
@@ -56,7 +57,7 @@ public class Charact : MonoBehaviour
     {
         if (characterMovement.GetMovementMode() != MovementMode.Running)
         {
-            characterMovement.SetMovementMode(MovementMode.Running);
+                characterMovement.SetMovementMode(MovementMode.Running);
         }
         else
         {
@@ -67,5 +68,12 @@ public class Charact : MonoBehaviour
     {
         characterMovement.Jump();
         characterAnimation.Jump();
+    }
+    void CheckStamina()
+    {
+        if (characterMovement.staminaVal < 0.1f)
+        {
+            characterMovement.SetMovementMode(MovementMode.Walking);
+        }
     }
 }
