@@ -16,7 +16,11 @@ public class CharacterMovement : MonoBehaviour
     public float rotationMultiplier;
     public float jumpForce = 100;
 
-    private Rigidbody rigidBody;
+    public Rigidbody rigidBody;
+
+    private StaminaController staminaController;
+    public float staminaVal = 100f;
+    private float staminaThreshold = 10f;
 
     private Vector3 velocity;
     private MovementMode movementMode;
@@ -24,6 +28,7 @@ public class CharacterMovement : MonoBehaviour
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        staminaController = GetComponent<StaminaController>();
     }
     private void Update()
     {
@@ -37,7 +42,25 @@ public class CharacterMovement : MonoBehaviour
         }
         else
         {
-            smoothSpeed = Mathf.Lerp(smoothSpeed, 0, Time.deltaTime * 100);
+            smoothSpeed = Mathf.Lerp(smoothSpeed, 0, Time.deltaTime * 100000000);
+        }
+        if(movementMode == MovementMode.Running)
+        {
+            if(staminaVal > 0)
+            {
+                staminaVal -= staminaThreshold * Time.deltaTime;
+                staminaController.DisplayStaminaStats(staminaVal);
+            }
+
+        }
+        else
+        {
+            if(staminaVal < 100)
+            {
+                staminaVal += staminaThreshold * Time.deltaTime;
+                staminaController.DisplayStaminaStats(staminaVal);
+            }
+
         }
     }
     public Vector3 Velocity { get => rigidBody.velocity; set => velocity = value; }
@@ -51,7 +74,7 @@ public class CharacterMovement : MonoBehaviour
                 maxSpeed = 20f;
                 break;
             case MovementMode.Running:
-                maxSpeed = 40f;
+                maxSpeed = 40f;              
                 break;
         }
     }

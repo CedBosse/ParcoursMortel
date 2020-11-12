@@ -18,21 +18,18 @@ public class CharacterAnimationController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {      
-
+    {
+       
         if (animator == null)
         {
             Debug.LogWarning("no valid animator");
             return;
         }
-
+        
         animator.SetFloat("Velocity", character.getVelocity());
-        Debug.Log(character.getVelocity());
     }
     public void Jump()
-    {
+    {      
         animator.SetTrigger("Jump");
     }
-
-
 }

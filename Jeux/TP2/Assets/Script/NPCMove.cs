@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,7 +16,7 @@ public class NPCMove : MonoBehaviour
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         if (_navMeshAgent == null)
-            Debug.Log("Nav is broken");
+            UnityEngine.Debug.Log("Nav is broken");
         else
             SetDestination();
     }
@@ -34,8 +35,16 @@ public class NPCMove : MonoBehaviour
     void Update()
     {
         if (_navMeshAgent == null)
-            Debug.Log("Nav is broken");
+            UnityEngine.Debug.Log("Nav is broken");
         else
             SetDestination(); SetDestination();
+            
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.SetActive(false);
+        }
     }
 }
