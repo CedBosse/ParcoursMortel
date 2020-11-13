@@ -17,6 +17,7 @@ TagManager:
   - Revolver
   - Shotgun
   - Assault Rifle
+  - VictoryLanding
   layers:
   - Default
   - TransparentFX
@@ -32,7 +33,7 @@ TagManager:
   - Player
   - WallRunnable
   - Ground
-  - 
+  - Victory
   - 
   - 
   - 

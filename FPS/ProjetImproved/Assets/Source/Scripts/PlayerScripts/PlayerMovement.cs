@@ -14,16 +14,12 @@ public class PlayerMovement : MonoBehaviour
     private const float HOOKSHOT_FOV = 100f;
 
     public Transform orientation;
-    bool allowDashForceCounter;
-
-    public Animator transition;
-    public float transitionTime = 1f;
-
+    private bool allowDashForceCounter;
 
     [SerializeField] private Transform hookshotTransform;
-    [SerializeField] private Image hookShotPoint;
 
     private CharacterController characterController;
+    private LevelHandler levelHandler;
 
     private Vector3 moveDirection;
 
@@ -48,12 +44,12 @@ public class PlayerMovement : MonoBehaviour
     public bool isWallRunning;
     public float maxWallRunCameraTilt, wallRunCameraTilt;
 
-    private bool isTouchingGround;
     private enum State { Normal, HookshotThrown, HookshotFlyingPlayer }
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        levelHandler = GetComponent<LevelHandler>();
         fCamera = transform.Find(Tags.LOOK_ROOT).transform.Find(Tags.ZOOM_CAMERA).GetComponent<Camera>();
         cameraFov = mainCamera.GetComponent<CameraFov>();
 
@@ -67,7 +63,8 @@ public class PlayerMovement : MonoBehaviour
         {
             default:
             case State.Normal:
-                CheckIfDead();
+                levelHandler.CheckIfDead();
+                levelHandler.CheckIfWin();
                 MoveThePlayer();
                 WallRunInput();
                 CheckForWall();
@@ -83,22 +80,6 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
 
-    }
-    private void CheckIfDead()
-    {
-        isTouchingGround = Physics.Raycast(transform.position, -orientation.up, 1f, terrain);
-
-        IEnumerator LoadLevel(int sceneNumber)
-        {
-            transition.SetTrigger("Start");
-            yield return new WaitForSeconds(transitionTime);
-            SceneManager.LoadScene(sceneNumber);
-        }
-
-        if (isTouchingGround)
-        {
-            StartCoroutine(LoadLevel(4));
-        }               
     }
     void MoveThePlayer()
     {
@@ -246,7 +227,7 @@ public class PlayerMovement : MonoBehaviour
         isWallRunning = true;
         allowDashForceCounter = false;
         speed = 15;
-        float wallJump = 0.05f;
+        float wallJump = 0.1f;
       
 
         if (moveDirection.magnitude <= maxWallSpeed)
