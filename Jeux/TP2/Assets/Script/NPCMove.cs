@@ -12,8 +12,11 @@ public class NPCMove : MonoBehaviour
 
     NavMeshAgent _navMeshAgent;
 
+    private Animator _animator;
+
     void Awake()
     {
+        _animator = GetComponent<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         if (_navMeshAgent == null)
             UnityEngine.Debug.Log("Nav is broken");
@@ -34,11 +37,17 @@ public class NPCMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       // Debug.Log(_navMeshAgent.isOnOffMeshLink);
         if (_navMeshAgent == null)
             UnityEngine.Debug.Log("Nav is broken");
         else
             SetDestination(); SetDestination();
-            
+
+        if (_navMeshAgent.isOnOffMeshLink)
+            _animator.SetBool("isJumping", true);
+        else
+            _animator.SetBool("isJumping", false);
+
     }
     private void OnCollisionEnter(Collision collision)
     {
