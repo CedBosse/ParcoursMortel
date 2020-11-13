@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using System.Diagnostics;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     [SerializeField] private Transform hookshotTransform;
+    [SerializeField] private Image hookShotPoint;
 
     private CharacterController characterController;
 

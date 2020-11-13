@@ -565,6 +565,7 @@ GameObject:
   - component: {fileID: 2113852313227106446}
   - component: {fileID: 6833570233499910682}
   - component: {fileID: 1898493374568760319}
+  - component: {fileID: 2218702897788561090}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -620,7 +621,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: {fileID: 4151952972976876934}
+  transition: {fileID: 0}
+  transitionTime: 1
   hookshotTransform: {fileID: 641918403588746496}
+  hookShotPoint: {fileID: 0}
   speed: 10
   jumpForce: 10
   mainCamera: {fileID: 4098445160798692266}
@@ -670,6 +674,7 @@ MonoBehaviour:
   - {fileID: 3160338440961503299}
   - {fileID: 6403801156789435337}
   - {fileID: 1761340729223309022}
+  playerInventory: {fileID: 2218702897788561090}
 --- !u!114 &1898493374568760319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -684,6 +689,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 4.25
   damage: 20
+--- !u!114 &2218702897788561090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4098445160874468174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0c2b6576d1fa947b013cae173ec9af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: []
 --- !u!82 &3641122421371304761
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1404,6 +1422,10 @@ PrefabInstance:
     - target: {fileID: 100028, guid: 2bd6bf150a6e08645964bd2baf2a789b, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100028, guid: 2bd6bf150a6e08645964bd2baf2a789b, type: 3}
+      propertyPath: m_TagString
+      value: Revolver
       objectReference: {fileID: 0}
     - target: {fileID: 100030, guid: 2bd6bf150a6e08645964bd2baf2a789b, type: 3}
       propertyPath: m_Layer
@@ -2492,6 +2514,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100026, guid: 1b1e15712c094a1409abf2c70f7e2703, type: 3}
+      propertyPath: m_TagString
+      value: Shotgun
+      objectReference: {fileID: 0}
     - target: {fileID: 100028, guid: 1b1e15712c094a1409abf2c70f7e2703, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -2718,14 +2744,14 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 626b338dd308a9d478ff8780feca87c7, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b1e15712c094a1409abf2c70f7e2703, type: 3}
---- !u!4 &4098445161159049668 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400026, guid: 1b1e15712c094a1409abf2c70f7e2703, type: 3}
-  m_PrefabInstance: {fileID: 4098445161158925150}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4098445161158827492 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100026, guid: 1b1e15712c094a1409abf2c70f7e2703, type: 3}
+  m_PrefabInstance: {fileID: 4098445161158925150}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4098445161159049668 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400026, guid: 1b1e15712c094a1409abf2c70f7e2703, type: 3}
   m_PrefabInstance: {fileID: 4098445161158925150}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4098445161751434890
@@ -2806,6 +2832,10 @@ PrefabInstance:
     - target: {fileID: 100030, guid: 48d42201fa1ddd74b8df820204882ede, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100030, guid: 48d42201fa1ddd74b8df820204882ede, type: 3}
+      propertyPath: m_TagString
+      value: Assault Rifle
       objectReference: {fileID: 0}
     - target: {fileID: 100032, guid: 48d42201fa1ddd74b8df820204882ede, type: 3}
       propertyPath: m_Layer

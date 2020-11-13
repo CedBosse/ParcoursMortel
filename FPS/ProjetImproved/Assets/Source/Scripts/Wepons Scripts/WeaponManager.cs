@@ -7,12 +7,15 @@ public class WeaponManager : MonoBehaviour
     [SerializeField]
     private WeaponHandler[] weapons;
 
+    [SerializeField]
+    private PlayerInventory playerInventory;
+
     private int currentWeaponIndex;
     // Start is called before the first frame update
     void Start()
     {
-        currentWeaponIndex = 0;
-        weapons[currentWeaponIndex].gameObject.SetActive(true);
+       // currentWeaponIndex = 0;
+        //weapons[currentWeaponIndex].gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -38,18 +41,22 @@ public class WeaponManager : MonoBehaviour
 
     void TurnOnSelectedWeapon(int weaponIndex)
     {
-
-        if(currentWeaponIndex == weaponIndex)
-        {
-            return;
-        }
-        else
+        Debug.Log(weapons[weaponIndex].gameObject.tag);
+        //if(currentWeaponIndex == weaponIndex)
+        //{
+        //    return;
+        //}
+        if (playerInventory.inventory.Contains(weapons[weaponIndex].gameObject.tag))
         {
             weapons[currentWeaponIndex].gameObject.SetActive(false);
 
             weapons[weaponIndex].gameObject.SetActive(true);
 
             currentWeaponIndex = weaponIndex;
+        }
+        else
+        {
+            return;
         }
 
     }
@@ -58,4 +65,5 @@ public class WeaponManager : MonoBehaviour
     {
         return weapons[currentWeaponIndex];
     }
+
 }
