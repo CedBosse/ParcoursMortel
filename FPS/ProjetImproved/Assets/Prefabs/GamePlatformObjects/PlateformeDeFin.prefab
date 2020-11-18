@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3069760421545557630}
   - component: {fileID: 5263325152286500083}
   - component: {fileID: 1351220088426923754}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Pilier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 8223225669912935688}
   - component: {fileID: 1614567417329894750}
   - component: {fileID: 8927762993289350061}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Pilier (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,9 +203,9 @@ GameObject:
   - component: {fileID: 7883072908074934838}
   - component: {fileID: 7883072908074934839}
   - component: {fileID: 8407177757094958899}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PlateformeDeFin
-  m_TagString: Untagged
+  m_TagString: VictoryLanding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 2093422906284077985}
   - component: {fileID: 7357130958014254978}
   - component: {fileID: 1273009350560710061}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Pilier (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
