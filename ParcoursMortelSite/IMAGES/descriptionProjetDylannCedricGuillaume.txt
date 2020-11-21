@@ -1,0 +1,3 @@
+Parcours Mortel est un jeu à la première personne dans un monde 3D où le joueur sera amené à parcourir des niveaux le plus rapidement possible avec des outils à sa disposition comme un grapin et une mecanique de wallrun.
+Des ennemis essayeront de mettre des bâtons dans les roues du joueur en l'attaquant et parfois, des armes seront à la disposition du joueur comme une hache ou même un fusil.
+Le joueur sera t-il capable d'aller le plus vite possible à la fin en évitant la mort au cours de ces parcours mortellement amusants?
