@@ -21,7 +21,7 @@
     <span class='ml-5 mr-5'>Courriel: <a href="">bosse.ced14@hotmail.com</a></span> 
   </div>
   <div class="card-body">
-  <span class=''>20 ans et gros fan de jeu vidéo. Je suis quelqu'un qui aime niaiser avec ses amis mais qui peut être sérieux lorsque nécessaire. Je souhaiterais intégrer une équipe de développement de jeu dans le futur dans le but de passer sénior un jour.</span>  
+  <span class=''>20 ans et gros fan de jeu vidéo. Je suis quelqu'un qui aime s'amuser avec ses amis mais qui peut être sérieux lorsque nécessaire. Je souhaiterais intégrer une équipe de développement de jeu dans le futur dans le but de passer sénior un jour.</span>  
   </div>
 </div>
 <div class="card">
