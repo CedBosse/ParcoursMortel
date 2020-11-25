@@ -92,18 +92,5 @@ public class MouseLook : MonoBehaviour
         lookRoot.localRotation = Quaternion.Euler(lookAngles.x, 0f, currentRollAngle);
         playerRoot.localRotation = Quaternion.Euler(0f, lookAngles.y, 0f);
 
-
-        //While Wallrunning
-        //Tilts camera in .5 second
-        if (Mathf.Abs(currentRollAngle) < 25 && playerMov.isWallRunning && playerMov.isWallRight)
-            currentRollAngle += Time.deltaTime * 25 * 2;
-        if (Mathf.Abs(currentRollAngle) < 25 && playerMov.isWallRunning && playerMov.isWallLeft)
-            currentRollAngle -= Time.deltaTime * 25 * 2;
-
-        //Tilts camera back again
-        if (currentRollAngle > 0 && !playerMov.isWallRight && !playerMov.isWallLeft)
-            currentRollAngle -= Time.deltaTime * 25 * 2;
-        if (currentRollAngle < 0 && !playerMov.isWallRight && !playerMov.isWallLeft)
-            currentRollAngle += Time.deltaTime * 25 * 2;
     }
 }

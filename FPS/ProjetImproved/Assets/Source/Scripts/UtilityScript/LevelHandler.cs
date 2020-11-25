@@ -33,7 +33,7 @@ public class LevelHandler : MonoBehaviour
 
         if (isTouchingGround)
         {
-            StartCoroutine(LoadLevel(4));
+            StartCoroutine(LoadLevel(6));
         }
     }
     public void CheckIfWin()

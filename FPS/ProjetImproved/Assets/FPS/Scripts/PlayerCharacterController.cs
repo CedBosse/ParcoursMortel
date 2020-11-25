@@ -4,6 +4,9 @@ using UnityEngine.Events;
 [RequireComponent(typeof(CharacterController), typeof(PlayerInputHandler), typeof(AudioSource))]
 public class PlayerCharacterController : MonoBehaviour
 {
+    private const float NORMAL_FOV = 60f;
+    private const float HOOKSHOT_FOV = 100f;
+
     [Header("References")]
     [Tooltip("Reference to the main camera used for the player")]
     public Camera playerCamera;
@@ -24,7 +27,7 @@ public class PlayerCharacterController : MonoBehaviour
     [Tooltip("Sharpness for the movement when grounded, a low value will make the player accelerate and decelerate slowly, a high value will do the opposite")]
     public float movementSharpnessOnGround = 15;
     [Tooltip("Max movement speed when crouching")]
-    [Range(0,1)]
+    [Range(0, 1)]
     public float maxSpeedCrouchedRatio = 0.5f;
     [Tooltip("Max movement speed when not grounded")]
     public float maxSpeedInAir = 10f;
@@ -101,7 +104,7 @@ public class PlayerCharacterController : MonoBehaviour
             return 1f;
         }
     }
-        
+
     Health m_Health;
     PlayerInputHandler m_InputHandler;
     CharacterController m_Controller;
@@ -117,6 +120,23 @@ public class PlayerCharacterController : MonoBehaviour
 
     const float k_JumpGroundingPreventionTime = 0.2f;
     const float k_GroundCheckDistanceInAir = 0.07f;
+
+    WallRun wallRunComponent;
+
+    private LevelHandler levelHandler;
+
+    [SerializeField] private Transform hookShotTransform;
+    [SerializeField] private CameraFov cameraFov;
+    private Vector3 hookshotPosition;
+    private State state;
+    private Vector3 characterVelocityMomentum;
+    private float hookshotSize;
+    private enum State { Normal, HookshotFlyingPlayer, HookshotThrown}
+
+    private void Awake()
+    {
+        hookShotTransform.gameObject.SetActive(false);
+    }
 
     void Start()
     {
@@ -136,19 +156,44 @@ public class PlayerCharacterController : MonoBehaviour
         m_Actor = GetComponent<Actor>();
         DebugUtility.HandleErrorIfNullGetComponent<Actor, PlayerCharacterController>(m_Actor, this, gameObject);
 
+        wallRunComponent = GetComponent<WallRun>();
+
         m_Controller.enableOverlapRecovery = true;
 
         m_Health.onDie += OnDie;
 
+        levelHandler = GetComponent<LevelHandler>();
+
         // force the crouch state to false when starting
         SetCrouchingState(false, true);
         UpdateCharacterHeight(true);
+        state = State.Normal;
     }
 
     void Update()
     {
+        switch (state)
+        {
+            default:
+            case State.Normal:
+                levelHandler.CheckIfDead();
+                levelHandler.CheckIfWin();
+                HandleCharacterMovement();
+                HandleCharacterLook();
+                HandleHookshotStart();
+                break;
+            case State.HookshotThrown:
+                HandleCharacterMovement();
+                HandleCharacterLook();
+                HandleHookshotThrow();
+                break;
+            case State.HookshotFlyingPlayer:
+                HandleCharacterLook();
+                HandleHookshotMovement();
+                break;
+        }
         // check for Y kill
-        if(!isDead && transform.position.y < killHeight)
+        if (!isDead && transform.position.y < killHeight)
         {
             m_Health.Kill();
         }
@@ -157,6 +202,7 @@ public class PlayerCharacterController : MonoBehaviour
 
         bool wasGrounded = isGrounded;
         GroundCheck();
+        Debug.Log(isGrounded);
 
         // landing
         if (isGrounded && !wasGrounded)
@@ -187,7 +233,8 @@ public class PlayerCharacterController : MonoBehaviour
 
         UpdateCharacterHeight(false);
 
-        HandleCharacterMovement();
+        //HandleCharacterMovement();
+        //HandleHookshotStart();
     }
 
     void OnDie()
@@ -224,16 +271,20 @@ public class PlayerCharacterController : MonoBehaviour
                     isGrounded = true;
 
                     // handle snapping to the ground
+                    if(state == State.Normal)
+                    {
                     if (hit.distance > m_Controller.skinWidth)
                     {
                         m_Controller.Move(Vector3.down * hit.distance);
                     }
+                    }
+
                 }
             }
         }
     }
 
-    void HandleCharacterMovement()
+    void HandleCharacterLook()
     {
         // horizontal character rotation
         {
@@ -250,9 +301,18 @@ public class PlayerCharacterController : MonoBehaviour
             m_CameraVerticalAngle = Mathf.Clamp(m_CameraVerticalAngle, -89f, 89f);
 
             // apply the vertical angle as a local rotation to the camera transform along its right axis (makes it pivot up and down)
-            playerCamera.transform.localEulerAngles = new Vector3(m_CameraVerticalAngle, 0, 0);
+            if (wallRunComponent != null)
+            {
+                playerCamera.transform.localEulerAngles = new Vector3(m_CameraVerticalAngle, 0, wallRunComponent.GetCameraRoll());
+            }
+            else
+            {
+                playerCamera.transform.localEulerAngles = new Vector3(m_CameraVerticalAngle, 0, 0);
+            }
         }
-
+    }
+    void HandleCharacterMovement()
+    {
         // character movement handling
         bool isSprinting = m_InputHandler.GetSprintInputHeld();
         {
@@ -267,29 +327,39 @@ public class PlayerCharacterController : MonoBehaviour
             Vector3 worldspaceMoveInput = transform.TransformVector(m_InputHandler.GetMoveInput());
 
             // handle grounded movement
-            if (isGrounded)
+            if (isGrounded || (wallRunComponent != null && wallRunComponent.IsWallRunning()))
             {
-                // calculate the desired velocity from inputs, max speed, and current slope
-                Vector3 targetVelocity = worldspaceMoveInput * maxSpeedOnGround * speedModifier;
-                // reduce speed if crouching by crouch speed ratio
-                if (isCrouching)
-                    targetVelocity *= maxSpeedCrouchedRatio;
-                targetVelocity = GetDirectionReorientedOnSlope(targetVelocity.normalized, m_GroundNormal) * targetVelocity.magnitude;
+                if (isGrounded)
+                {
+                    // calculate the desired velocity from inputs, max speed, and current slope
+                    Vector3 targetVelocity = worldspaceMoveInput * maxSpeedOnGround * speedModifier;
+                    // reduce speed if crouching by crouch speed ratio
+                    if (isCrouching)
+                        targetVelocity *= maxSpeedCrouchedRatio;
+                    targetVelocity = GetDirectionReorientedOnSlope(targetVelocity.normalized, m_GroundNormal) * targetVelocity.magnitude;
 
-                // smoothly interpolate between our current velocity and the target velocity based on acceleration speed
-                characterVelocity = Vector3.Lerp(characterVelocity, targetVelocity, movementSharpnessOnGround * Time.deltaTime);
-
+                    // smoothly interpolate between our current velocity and the target velocity based on acceleration speed
+                    characterVelocity = Vector3.Lerp(characterVelocity, targetVelocity, movementSharpnessOnGround * Time.deltaTime);
+                }
                 // jumping
-                if (isGrounded && m_InputHandler.GetJumpInputDown())
+                if ((isGrounded || (wallRunComponent != null && wallRunComponent.IsWallRunning())) && m_InputHandler.GetJumpInputDown())
                 {
                     // force the crouch state to false
                     if (SetCrouchingState(false, false))
                     {
-                        // start by canceling out the vertical component of our velocity
-                        characterVelocity = new Vector3(characterVelocity.x, 0f, characterVelocity.z);
-
-                        // then, add the jumpSpeed value upwards
-                        characterVelocity += Vector3.up * jumpForce;
+                        if (isGrounded)
+                        {
+                            // start by canceling out the vertical component of our velocity
+                            characterVelocity = new Vector3(characterVelocity.x, 0f, characterVelocity.z);
+                            // then, add the jumpSpeed value upwards
+                            characterVelocity += Vector3.up * jumpForce;
+                        }
+                        else
+                        {
+                            characterVelocity = new Vector3(characterVelocity.x, 0f, characterVelocity.z);
+                            // then, add the jumpSpeed value upwards
+                            characterVelocity += wallRunComponent.GetWallJumpDirection() * jumpForce;
+                        }
 
                         // play sound
                         audioSource.PlayOneShot(jumpSFX);
@@ -318,24 +388,42 @@ public class PlayerCharacterController : MonoBehaviour
             // handle air movement
             else
             {
-                // add air acceleration
-                characterVelocity += worldspaceMoveInput * accelerationSpeedInAir * Time.deltaTime;
+                if (wallRunComponent == null || (wallRunComponent != null && !wallRunComponent.IsWallRunning()))
+                {
+                    // add air acceleration
+                    characterVelocity += worldspaceMoveInput * accelerationSpeedInAir * Time.deltaTime;
 
-                // limit air speed to a maximum, but only horizontally
-                float verticalVelocity = characterVelocity.y;
-                Vector3 horizontalVelocity = Vector3.ProjectOnPlane(characterVelocity, Vector3.up);
-                horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, maxSpeedInAir * speedModifier);
-                characterVelocity = horizontalVelocity + (Vector3.up * verticalVelocity);
+                    // limit air speed to a maximum, but only horizontally
+                    float verticalVelocity = characterVelocity.y;
+                    Vector3 horizontalVelocity = Vector3.ProjectOnPlane(characterVelocity, Vector3.up);
+                    horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, maxSpeedInAir * speedModifier);
+                    characterVelocity = horizontalVelocity + (Vector3.up * verticalVelocity);
+                    
 
-                // apply the gravity to the velocity
-                characterVelocity += Vector3.down * gravityDownForce * Time.deltaTime;
+                    // apply the gravity to the velocity
+                    characterVelocity += Vector3.down * gravityDownForce * Time.deltaTime;
+                   
+                } 
+                
             }
         }
 
         // apply the final calculated velocity value as a character movement
         Vector3 capsuleBottomBeforeMove = GetCapsuleBottomHemisphere();
         Vector3 capsuleTopBeforeMove = GetCapsuleTopHemisphere(m_Controller.height);
+        
+        characterVelocity += characterVelocityMomentum;
         m_Controller.Move(characterVelocity * Time.deltaTime);
+
+        if (characterVelocityMomentum.magnitude >= 0f)
+        {
+            float momentumDrag = 3f;
+            characterVelocityMomentum -= characterVelocityMomentum * momentumDrag * Time.deltaTime;
+            if (characterVelocityMomentum.magnitude < 1f)
+            {
+                characterVelocityMomentum = Vector3.zero;
+            }
+        }
 
         // detect obstructions to adjust velocity accordingly
         m_LatestImpactSpeed = Vector3.zero;
@@ -433,4 +521,86 @@ public class PlayerCharacterController : MonoBehaviour
         isCrouching = crouched;
         return true;
     }
+
+    private void HandleHookshotStart()
+    {
+        if (TestInputDownHookshot())
+        {
+            if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit raycastHit) && Vector3.Distance(transform.position, raycastHit.point) <= 30f && raycastHit.transform.tag == "GrapPoint")
+            {
+                hookshotPosition = raycastHit.point;
+                hookshotSize = 0f;
+                hookShotTransform.gameObject.SetActive(true);
+                hookShotTransform.localScale = Vector3.zero;
+                state = State.HookshotThrown;
+            }
+        }
+    }
+    private void HandleHookshotThrow()
+    {
+        hookShotTransform.LookAt(hookshotPosition);
+
+        float hookshotThrowSpeed = 125f;
+        hookshotSize += hookshotThrowSpeed * Time.deltaTime;
+        hookShotTransform.localScale = new Vector3(1, 1, hookshotSize);
+
+        if(hookshotSize >= Vector3.Distance(transform.position, hookshotPosition))
+        {
+            state = State.HookshotFlyingPlayer;
+            cameraFov.SetCameraFov(HOOKSHOT_FOV);
+        }
+
+    }
+    private void HandleHookshotMovement()
+    {
+        hookShotTransform.LookAt(hookshotPosition);
+        Vector3 hookshotDir = (hookshotPosition - transform.position).normalized;
+
+        float hookshotSpeedMin = 10f;
+        float hookshotSpeedMax = 40f;
+        float hookshotSpeed = Mathf.Clamp(Vector3.Distance(transform.position, hookshotPosition), hookshotSpeedMin, hookshotSpeedMax);
+        float hookshotSpeedMultiplier = 4f;
+
+
+        m_Controller.Move(hookshotDir * hookshotSpeed * hookshotSpeedMultiplier * Time.deltaTime);
+
+        float reachedHookshotPositionDistance = 1f;
+        
+        if(Vector3.Distance(transform.position, hookshotPosition) < reachedHookshotPositionDistance)
+        {
+            StopHookshot();
+        }
+        if (TestInputDownHookshot())
+        {
+            StopHookshot();
+        }
+        if (TestInputJump())
+        {
+            float momentumExtraSpeed = 0.05f;
+            float jumpSpeed = 1.05f;
+            characterVelocityMomentum = hookshotDir * momentumExtraSpeed * 6.5f;
+            characterVelocityMomentum += Vector3.up * jumpSpeed;
+            StopHookshot();
+        }
+    }
+    private void StopHookshot()
+    {
+        state = State.Normal;
+        ResetGravity();
+        hookShotTransform.gameObject.SetActive(false);
+        cameraFov.SetCameraFov(NORMAL_FOV);
+    }
+    private void ResetGravity()
+    {
+        characterVelocity = new Vector3(characterVelocity.x, 0f, characterVelocity.z);
+    }
+    private bool TestInputDownHookshot()
+    {
+        return Input.GetKeyDown(KeyCode.E);
+    }
+    private bool TestInputJump()
+    {
+        return Input.GetKeyDown(KeyCode.Space);
+    }
+
 }
