@@ -9,11 +9,14 @@ public class PlayerAttack : MonoBehaviour
     public float fireRate = 15f;
     private float nextTimeToFire;
     public float damage = 20f;
-
+    
+    [SerializeField]
     private Animator zoomCameraAnim;
     private bool zoomed;
 
+    [SerializeField]
     private Camera mainCam;
+    [SerializeField]
     private Camera fCamera;
 
     private GameObject crosshair;
@@ -22,8 +25,8 @@ public class PlayerAttack : MonoBehaviour
     {
         weaponManager = GetComponent<WeaponManager>();
 
-        zoomCameraAnim = transform.Find(Tags.LOOK_ROOT).transform.Find(Tags.ZOOM_CAMERA).GetComponent<Animator>();
-        fCamera = transform.Find(Tags.LOOK_ROOT).transform.Find(Tags.ZOOM_CAMERA).GetComponent<Camera>();
+       // zoomCameraAnim = transform.Find(Tags.LOOK_ROOT).transform.Find(Tags.ZOOM_CAMERA).GetComponent<Animator>();
+       // fCamera = transform.Find(Tags.LOOK_ROOT).transform.Find(Tags.ZOOM_CAMERA).GetComponent<Camera>();
 
         crosshair = GameObject.FindWithTag(Tags.CROSSHAIR);
 
@@ -39,7 +42,7 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         WeaponShoot();
-        ZoomInAndOut();
+       // ZoomInAndOut();
     }
 
     void WeaponShoot()

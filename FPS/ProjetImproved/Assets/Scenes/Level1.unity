@@ -59876,6 +59876,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 220956910859536208, guid: 22d2cdcba01176140ae76eff29955915,
+        type: 3}
+      propertyPath: zoomCameraAnim
+      value: 
+      objectReference: {fileID: 1593874607}
+    - target: {fileID: 220956910859536208, guid: 22d2cdcba01176140ae76eff29955915,
+        type: 3}
+      propertyPath: fCamera
+      value: 
+      objectReference: {fileID: 1593874608}
+    - target: {fileID: 220956910859536208, guid: 22d2cdcba01176140ae76eff29955915,
+        type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 1890755305}
     - target: {fileID: 4228451464521006589, guid: 22d2cdcba01176140ae76eff29955915,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -62819,6 +62834,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4661435515762813124, guid: e289bf5debb17f6459818c207d781953,
     type: 3}
   m_PrefabInstance: {fileID: 1593260704}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1593874607 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5333245148867811322, guid: 22d2cdcba01176140ae76eff29955915,
+    type: 3}
+  m_PrefabInstance: {fileID: 1530012381}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1593874608 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8231121332364704472, guid: 22d2cdcba01176140ae76eff29955915,
+    type: 3}
+  m_PrefabInstance: {fileID: 1530012381}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1595948039
 PrefabInstance:
@@ -74658,6 +74685,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1888892075}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &1890755305 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4905474247361581332, guid: 22d2cdcba01176140ae76eff29955915,
+    type: 3}
+  m_PrefabInstance: {fileID: 1530012381}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1891567236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85100,6 +85133,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1898493374568760319, guid: 6ed43ebe17646de4a89fd4bf8b85d8e5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2113852313227106446, guid: 6ed43ebe17646de4a89fd4bf8b85d8e5,
         type: 3}
       propertyPath: toggle
