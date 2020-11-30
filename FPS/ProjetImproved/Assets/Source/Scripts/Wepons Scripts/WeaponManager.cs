@@ -31,11 +31,11 @@ public class WeaponManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            TurnOnSelectedWeapon(2);
+            TurnOnSelectedWeapon(3);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            TurnOnSelectedWeapon(3);
+            TurnOnSelectedWeapon(2);
         }
     }
 

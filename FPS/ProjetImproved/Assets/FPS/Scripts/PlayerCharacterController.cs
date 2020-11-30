@@ -570,10 +570,10 @@ public class PlayerCharacterController : MonoBehaviour
         {
             StopHookshot();
         }
-        if (TestInputDownHookshot())
+        /*if (TestInputDownHookshot())
         {
             StopHookshot();
-        }
+        }*/
         if (TestInputJump())
         {
             float momentumExtraSpeed = 0.05f;

@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour
     {
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(4);
     }
     public void Play()
     {

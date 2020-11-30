@@ -1929,7 +1929,7 @@ PrefabInstance:
     - target: {fileID: 5290310398822954592, guid: b5f033b99daa59342a297cfb191c4eda,
         type: 3}
       propertyPath: m_TagString
-      value: Revolver
+      value: Assault Rifle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5f033b99daa59342a297cfb191c4eda, type: 3}
