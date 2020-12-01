@@ -7,34 +7,37 @@ using UnityEngine.SceneManagement;
 public class LevelHandler : MonoBehaviour
 {
     private bool isTouchingGround;
-    private bool isTouchingVictory;
+    public bool isTouchingVictory;
 
+    [SerializeField] private HeartManager lives;
     [SerializeField] private LayerMask deathTerrain;
     [SerializeField] private LayerMask winTerrain;
     [SerializeField] private ParticleSystem stars;
     [SerializeField] private GameObject endScreen;
     [SerializeField] private GameObject crossHairCanvas;
+    [SerializeField] private Transform player;
+    [SerializeField] private TimerComponent timerComponent;
     
     public Transform orientation;
 
     public Animator transition;
     public float transitionTime = 1f;
+    private int counter = 0;
+
+
     public void CheckIfDead()
     {
         isTouchingGround = Physics.Raycast(transform.position, -orientation.up, 1f, deathTerrain);
 
-        IEnumerator LoadLevel(int sceneNumber)
-        {
-            transition.SetTrigger("Start");
-            yield return new WaitForSeconds(transitionTime);
-            Cursor.lockState = CursorLockMode.None;
-            SceneManager.LoadScene(sceneNumber);
-        }
-
         if (isTouchingGround)
         {
-            StartCoroutine(LoadLevel(6));
+            Respawn(); 
+            lives.LoseHeart(1);             
         }
+    }
+    public void Respawn()
+    {
+        transform.position = new Vector3(lives.spawnPoint.transform.position.x, lives.spawnPoint.transform.position.y, lives.spawnPoint.transform.position.z);
     }
     public void CheckIfWin()
     {
@@ -44,15 +47,27 @@ public class LevelHandler : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
             Cursor.lockState = CursorLockMode.None;
-            crossHairCanvas.SetActive(false);
+            Cursor.visible = true;
+            //crossHairCanvas.SetActive(false);
+            AddScore();
+            Debug.Log(PlayerPrefs.GetInt("TotalScore"));
             endScreen.SetActive(true);
         }
 
         if (isTouchingVictory)
-        {
+        {          
             stars.Play();
             StartCoroutine(LoadWinScreen());
         }
 
+    }
+    private void AddScore()
+    {
+        if(counter < 1)
+        {
+            PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + timerComponent.timer);
+            PlayerPrefs.SetInt("TotalScore", PlayerPrefs.GetInt("TotalScore", 0) + PlayerPrefs.GetInt("Score"));
+            counter++;
+        }
     }
 }

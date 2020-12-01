@@ -7,8 +7,11 @@ using UnityEngine.SceneManagement;
 public class TimerComponent : MonoBehaviour
 {
     private Text txt;
-    private int timer = 60;
+    public int timer = 60;
     private float elapsed;
+    private int counter = 0;
+
+    [SerializeField] private LevelHandler levelHandler;
     void Awake()
     {
         txt = GetComponent<Text>();
@@ -16,6 +19,12 @@ public class TimerComponent : MonoBehaviour
 
     void Update()
     {
+        if (levelHandler.isTouchingVictory)
+        {
+            return;
+        }
+           
+        
         txt.text = "Time : " + timer.ToString();
         elapsed += Time.deltaTime;
         if (elapsed >= 1)
@@ -25,6 +34,6 @@ public class TimerComponent : MonoBehaviour
         }
 
         if (timer == 0)
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(10);
     }
 }

@@ -9,6 +9,8 @@ public class PlayerAttack : MonoBehaviour
     public float fireRate = 15f;
     private float nextTimeToFire;
     public float damage = 20f;
+
+    private Damageable ennemyHealth;
     
     [SerializeField]
     private Animator zoomCameraAnim;
@@ -56,7 +58,8 @@ public class PlayerAttack : MonoBehaviour
                 weaponManager.GetCurrentSelectedWeapon().ShootAnimation();
                 if (Physics.Raycast(fCamera.transform.position, fCamera.transform.forward, out RaycastHit raycastHit) && raycastHit.transform.tag == "Enemy")
                 {
-                    raycastHit.transform.gameObject.SetActive(false);
+                    ennemyHealth = raycastHit.transform.gameObject.GetComponent<Damageable>();
+                    ennemyHealth.InflictDamage(5, false, this.transform.gameObject);
                 }
 
                 //BulletFired();
@@ -75,7 +78,8 @@ public class PlayerAttack : MonoBehaviour
                     weaponManager.GetCurrentSelectedWeapon().ShootAnimation();
                     if (Physics.Raycast(fCamera.transform.position, fCamera.transform.forward, out RaycastHit raycastHit) && raycastHit.transform.tag == "Enemy")
                     {
-                        raycastHit.transform.gameObject.SetActive(false);
+                        ennemyHealth = raycastHit.transform.gameObject.GetComponent<Damageable>();
+                        ennemyHealth.InflictDamage(20, false, this.transform.gameObject);
                     }
                     //BulletFired();
                 }

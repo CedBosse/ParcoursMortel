@@ -4,13 +4,15 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     [Tooltip("Maximum amount of health")]
-    public float maxHealth = 10f;
+    public float maxHealth = 100f;
     [Tooltip("Health ratio at which the critical health vignette starts appearing")]
     public float criticalHealthRatio = 0.3f;
 
     public UnityAction<float, GameObject> onDamaged;
     public UnityAction<float> onHealed;
     public UnityAction onDie;
+    [SerializeField] private LevelHandler levelHandler;
+    [SerializeField] private HeartManager healthManager;
 
     public float currentHealth { get; set; }
     public bool invincible { get; set; }
@@ -42,6 +44,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage, GameObject damageSource)
     {
+        Debug.Log("you took" + damage + "you had" + currentHealth);
         if (invincible)
             return;
 
@@ -69,6 +72,10 @@ public class Health : MonoBehaviour
             onDamaged.Invoke(maxHealth, null);
         }
 
+        if(this.gameObject.tag == "Enemy")
+        {
+            this.gameObject.SetActive(false);
+        }
         HandleDeath();
     }
 
@@ -82,9 +89,21 @@ public class Health : MonoBehaviour
         {
             if (onDie != null)
             {
-                m_IsDead = true;
-                onDie.Invoke();
+                if(this.transform.gameObject.tag == "Enemy")
+                {
+                    m_IsDead = true;
+                    onDie.Invoke();
+                    PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 20);
+                }
+                else
+                {
+                    levelHandler.Respawn();
+                    healthManager.LoseHeart(1);
+                    currentHealth = maxHealth;
+                }
+
             }
+            
         }
     }
 }

@@ -28,6 +28,8 @@ public class GameFlowManager : MonoBehaviour
 
     public bool gameIsEnding { get; private set; }
 
+
+
     PlayerCharacterController m_Player;
     NotificationHUDManager m_NotificationHUDManager;
     ObjectiveManager m_ObjectiveManager;

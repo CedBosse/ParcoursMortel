@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InGameMenuManager : MonoBehaviour
@@ -20,6 +21,7 @@ public class InGameMenuManager : MonoBehaviour
     [Tooltip("GameObject for the controls")]
     public GameObject controlImage;
 
+    private Scene scene;
     PlayerInputHandler m_PlayerInputsHandler;
     Health m_PlayerHealth;
     FramerateCounter m_FramerateCounter;
@@ -48,12 +50,14 @@ public class InGameMenuManager : MonoBehaviour
 
         framerateToggle.isOn = m_FramerateCounter.uiText.gameObject.activeSelf;
         framerateToggle.onValueChanged.AddListener(OnFramerateCounterChanged);
+
+        scene = SceneManager.GetActiveScene();
     }
 
     private void Update()
     {
         // Lock cursor when clicking outside of menu
-        if (!menuRoot.activeSelf && Input.GetMouseButtonDown(0))
+        if (!menuRoot.activeSelf && Input.GetMouseButtonDown(0) && scene.buildIndex != -1)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -90,6 +94,16 @@ public class InGameMenuManager : MonoBehaviour
     public void ClosePauseMenu()
     {
         SetPauseMenuActivation(false);
+    } 
+    public void OpenPauseMenu()
+    {
+        if (controlImage.activeSelf)
+        {
+            controlImage.SetActive(false);
+            return;
+        }
+
+        SetPauseMenuActivation(!menuRoot.activeSelf);
     }
 
     void SetPauseMenuActivation(bool active)
@@ -107,8 +121,17 @@ public class InGameMenuManager : MonoBehaviour
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            if(scene.buildIndex == -1)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+
             Time.timeScale = 1f;
             AudioUtility.SetMasterVolume(1);
         }

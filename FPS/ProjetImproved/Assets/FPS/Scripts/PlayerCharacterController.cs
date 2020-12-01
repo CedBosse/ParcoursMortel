@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerInputHandler), typeof(AudioSource))]
 public class PlayerCharacterController : MonoBehaviour
@@ -48,6 +49,12 @@ public class PlayerCharacterController : MonoBehaviour
     [Header("Jump")]
     [Tooltip("Force applied upward when jumping")]
     public float jumpForce = 9f;
+    
+    [Header("Grapple")]
+    [Tooltip("Variable linked to the grapple mechanic")]
+    public float jumpSpeed = 1.05f;
+    [SerializeField] private Transform hookShotTransform;
+    [SerializeField] private CameraFov cameraFov;
 
     [Header("Stance")]
     [Tooltip("Ratio (0-1) of the character height where the camera will be at")]
@@ -104,7 +111,7 @@ public class PlayerCharacterController : MonoBehaviour
             return 1f;
         }
     }
-
+    
     Health m_Health;
     PlayerInputHandler m_InputHandler;
     CharacterController m_Controller;
@@ -124,18 +131,27 @@ public class PlayerCharacterController : MonoBehaviour
     WallRun wallRunComponent;
 
     private LevelHandler levelHandler;
+    private HeartManager healthManager;
 
-    [SerializeField] private Transform hookShotTransform;
-    [SerializeField] private CameraFov cameraFov;
     private Vector3 hookshotPosition;
     private State state;
     private Vector3 characterVelocityMomentum;
     private float hookshotSize;
+
+    private Scene scene;
+
     private enum State { Normal, HookshotFlyingPlayer, HookshotThrown}
 
     private void Awake()
     {
         hookShotTransform.gameObject.SetActive(false);
+        PlayerPrefs.SetInt("Score", 0);
+        scene = SceneManager.GetActiveScene();
+        if(scene.buildIndex == 4)
+        {
+            PlayerPrefs.SetInt("TotalScore", 0);
+        }
+        
     }
 
     void Start()
@@ -163,6 +179,7 @@ public class PlayerCharacterController : MonoBehaviour
         m_Health.onDie += OnDie;
 
         levelHandler = GetComponent<LevelHandler>();
+        healthManager = GetComponent<HeartManager>();
 
         // force the crouch state to false when starting
         SetCrouchingState(false, true);
@@ -195,17 +212,17 @@ public class PlayerCharacterController : MonoBehaviour
         // check for Y kill
         if (!isDead && transform.position.y < killHeight)
         {
-            m_Health.Kill();
+            levelHandler.Respawn();
+            healthManager.LoseHeart(1);
         }
 
         hasJumpedThisFrame = false;
 
         bool wasGrounded = isGrounded;
         GroundCheck();
-        Debug.Log(isGrounded);
 
         // landing
-        if (isGrounded && !wasGrounded)
+       /* if (isGrounded && !wasGrounded)
         {
             // Fall damage
             float fallSpeed = -Mathf.Min(characterVelocity.y, m_LatestImpactSpeed.y);
@@ -223,7 +240,7 @@ public class PlayerCharacterController : MonoBehaviour
                 // land SFX
                 audioSource.PlayOneShot(landSFX);
             }
-        }
+        }*/
 
         // crouching
         if (m_InputHandler.GetCrouchInputDown())
@@ -577,7 +594,7 @@ public class PlayerCharacterController : MonoBehaviour
         if (TestInputJump())
         {
             float momentumExtraSpeed = 0.05f;
-            float jumpSpeed = 1.05f;
+            
             characterVelocityMomentum = hookshotDir * momentumExtraSpeed * 6.5f;
             characterVelocityMomentum += Vector3.up * jumpSpeed;
             StopHookshot();

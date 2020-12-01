@@ -7,6 +7,12 @@ public class GameOverTransition : MonoBehaviour
 {
     public Animator transition;
     public float transitionTime = 1f;
+
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
     IEnumerator LoadLevel(int sceneNumber)
     {
         transition.SetTrigger("Start");
@@ -21,6 +27,6 @@ public class GameOverTransition : MonoBehaviour
 
     public void MainMenu()
     {
-        StartCoroutine(LoadLevel(5));
+        StartCoroutine(LoadLevel(9));
     }
 }

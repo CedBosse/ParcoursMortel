@@ -101,6 +101,25 @@ MonoBehaviour:
   wallGravityDownForce: 20
   useSprint: 0
   wallRunVolume: {fileID: 0}
+--- !u!114 &1104024193437928055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6017493823583116821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 764ad4373742aa4418bb644e5469c791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnPoint: {fileID: 0}
+  transition: {fileID: 0}
+  transitionTime: 1
 --- !u!114 &220956910605949155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,16 +149,36 @@ PrefabInstance:
       propertyPath: debugHitPointTrasform
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 814417836257332542, guid: 761cdc9e4e883334cbdcea062d0befa7,
+        type: 3}
+      propertyPath: recievesFallDamage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 951441629745536308, guid: 761cdc9e4e883334cbdcea062d0befa7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2286125971047457827, guid: 761cdc9e4e883334cbdcea062d0befa7,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 5744077454911015068, guid: 761cdc9e4e883334cbdcea062d0befa7,
+        type: 3}
+      propertyPath: looping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6717119209339842490, guid: 761cdc9e4e883334cbdcea062d0befa7,
         type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6766908940367077275, guid: 761cdc9e4e883334cbdcea062d0befa7,
+        type: 3}
+      propertyPath: lives
+      value: 
+      objectReference: {fileID: 1104024193437928055}
     - target: {fileID: 6937526230831022785, guid: 761cdc9e4e883334cbdcea062d0befa7,
         type: 3}
       propertyPath: m_RootOrder
@@ -185,10 +224,40 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8011940416319660640, guid: 761cdc9e4e883334cbdcea062d0befa7,
+        type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011940416319660640, guid: 761cdc9e4e883334cbdcea062d0befa7,
+        type: 3}
+      propertyPath: BypassReverbZones
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011940416319660640, guid: 761cdc9e4e883334cbdcea062d0befa7,
+        type: 3}
+      propertyPath: BypassListenerEffects
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011940416319660640, guid: 761cdc9e4e883334cbdcea062d0befa7,
+        type: 3}
+      propertyPath: BypassEffects
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011940416319660640, guid: 761cdc9e4e883334cbdcea062d0befa7,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011940416319660640, guid: 761cdc9e4e883334cbdcea062d0befa7,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8303093099919959869, guid: 761cdc9e4e883334cbdcea062d0befa7,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 18743
+      value: 22839
       objectReference: {fileID: 0}
     - target: {fileID: 8303093099919959869, guid: 761cdc9e4e883334cbdcea062d0befa7,
         type: 3}

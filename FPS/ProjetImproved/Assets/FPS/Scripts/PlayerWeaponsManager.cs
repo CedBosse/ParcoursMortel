@@ -110,7 +110,7 @@ public class PlayerWeaponsManager : MonoBehaviour
         if (activeWeapon && m_WeaponSwitchState == WeaponSwitchState.Up)
         {
             // handle aiming down sights
-            isAiming = m_InputHandler.GetAimInputHeld();
+            //isAiming = m_InputHandler.GetAimInputHeld();
 
             // handle shooting
             bool hasFired = activeWeapon.HandleShootInputs(

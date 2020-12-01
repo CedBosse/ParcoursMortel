@@ -17,6 +17,8 @@ TagManager:
   - Enemy
   - Weapon
   - Crosshair
+  - Life
+  - HeartContainer
   layers:
   - Default
   - TransparentFX

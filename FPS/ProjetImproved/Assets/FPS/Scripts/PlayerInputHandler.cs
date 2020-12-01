@@ -111,7 +111,7 @@ public class PlayerInputHandler : MonoBehaviour
         return false;
     }
 
-    public bool GetAimInputHeld()
+    /*public bool GetAimInputHeld()
     {
         if (CanProcessInput())
         {
@@ -121,7 +121,7 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         return false;
-    }
+    }*/
 
     public bool GetSprintInputHeld()
     {
