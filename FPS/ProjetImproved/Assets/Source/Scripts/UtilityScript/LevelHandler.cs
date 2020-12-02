@@ -15,6 +15,7 @@ public class LevelHandler : MonoBehaviour
     [SerializeField] private ParticleSystem stars;
     [SerializeField] private GameObject endScreen;
     [SerializeField] private GameObject crossHairCanvas;
+    [SerializeField] private GameObject hud;
     [SerializeField] private Transform player;
     [SerializeField] private TimerComponent timerComponent;
     
@@ -48,9 +49,9 @@ public class LevelHandler : MonoBehaviour
             yield return new WaitForSeconds(1);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            //crossHairCanvas.SetActive(false);
+            crossHairCanvas.SetActive(false);
+            hud.SetActive(false);
             AddScore();
-            Debug.Log(PlayerPrefs.GetInt("TotalScore"));
             endScreen.SetActive(true);
         }
 

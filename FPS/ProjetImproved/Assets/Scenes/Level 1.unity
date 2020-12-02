@@ -60060,6 +60060,11 @@ PrefabInstance:
       propertyPath: timerComponent
       value: 
       objectReference: {fileID: 475083283}
+    - target: {fileID: 7692673921578379698, guid: 22d2cdcba01176140ae76eff29955915,
+        type: 3}
+      propertyPath: hud
+      value: 
+      objectReference: {fileID: 2073147917}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22d2cdcba01176140ae76eff29955915, type: 3}
 --- !u!1001 &1531406336
@@ -83785,6 +83790,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7405846476849834440, guid: c6308cb7062fac34e8e50600086b12a1,
     type: 3}
   m_PrefabInstance: {fileID: 2070771792}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2073147917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7491870013581781384, guid: c996b53e9f849234393d1e90f68d1679,
+    type: 3}
+  m_PrefabInstance: {fileID: 1960935544}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2073240407
 PrefabInstance:
