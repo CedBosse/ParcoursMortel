@@ -7,20 +7,24 @@ public class MainMenu : MonoBehaviour
 {
     public Animator transition;
     public float transitionTime = 1f;
-    IEnumerator LoadLevel()
+    IEnumerator LoadLevel(int path)
     {
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(path);
     }
     public void Play()
     {
-        StartCoroutine(LoadLevel());
+        StartCoroutine(LoadLevel(1));
     }
 
     public void Quit()
     {
         Debug.Log("Quit");
         Application.Quit();      
+    }
+    public void LevelSelect(int index)
+    {
+        StartCoroutine(LoadLevel(index));
     }
 }

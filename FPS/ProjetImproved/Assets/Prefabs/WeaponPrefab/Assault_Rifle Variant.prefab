@@ -4854,11 +4854,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100030, guid: 48d42201fa1ddd74b8df820204882ede, type: 3}
       propertyPath: m_Name
-      value: Assault_Rifle
+      value: Assault_Rifle Variant
       objectReference: {fileID: 0}
     - target: {fileID: 100030, guid: 48d42201fa1ddd74b8df820204882ede, type: 3}
       propertyPath: m_TagString
-      value: Revolver
+      value: Assault Rifle
       objectReference: {fileID: 0}
     - target: {fileID: 100032, guid: 48d42201fa1ddd74b8df820204882ede, type: 3}
       propertyPath: m_IsActive

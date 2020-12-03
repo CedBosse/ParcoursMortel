@@ -27,6 +27,6 @@ public class NextLevelTransition : MonoBehaviour
 
     public void MainMenu()
     {
-        StartCoroutine(LoadLevel(9));
+        StartCoroutine(LoadLevel(0));
     }
 }

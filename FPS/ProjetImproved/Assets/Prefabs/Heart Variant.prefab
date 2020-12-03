@@ -15,6 +15,19 @@ MonoBehaviour:
   degreesPerSecond: 30
   amplitude: 0.2
   frequency: 1
+--- !u!65 &1522640651899964053
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5353627396212760279}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.1679075, y: 0.44791496, z: 2.0693667}
+  m_Center: {x: 0.0014882088, y: -0.0025726787, z: -0.046597403}
 --- !u!1 &6301847048553482080
 GameObject:
   m_ObjectHideFlags: 0

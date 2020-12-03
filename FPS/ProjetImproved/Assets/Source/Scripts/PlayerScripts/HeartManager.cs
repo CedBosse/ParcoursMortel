@@ -13,6 +13,8 @@ public class HeartManager : MonoBehaviour
     public Animator transition;
     public float transitionTime = 1f;
 
+    [SerializeField] private GameObject audio;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +37,8 @@ public class HeartManager : MonoBehaviour
                 PlayerPrefs.SetInt("HighScore", PlayerPrefs.GetInt("TotalScore", 0));
             }
             
-            StartCoroutine(LoadLevel(10));
+            StartCoroutine(LoadLevel(6));
+            Destroy(audio);
         }
     }
 

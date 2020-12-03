@@ -34,9 +34,9 @@ public class Damageable : MonoBehaviour
             }
 
             // potentially reduce damages if inflicted by self
-            if (health.gameObject == damageSource)
+            if (health.gameObject.tag == damageSource.tag)
             {
-                totalDamage *= sensibilityToSelfdamage;
+                totalDamage = 0;
             }
 
             // apply the damages

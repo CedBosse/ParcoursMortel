@@ -27,9 +27,6 @@ public class PlayerAttack : MonoBehaviour
     {
         weaponManager = GetComponent<WeaponManager>();
 
-       // zoomCameraAnim = transform.Find(Tags.LOOK_ROOT).transform.Find(Tags.ZOOM_CAMERA).GetComponent<Animator>();
-       // fCamera = transform.Find(Tags.LOOK_ROOT).transform.Find(Tags.ZOOM_CAMERA).GetComponent<Camera>();
-
         crosshair = GameObject.FindWithTag(Tags.CROSSHAIR);
 
         mainCam = Camera.main;
@@ -44,7 +41,7 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         WeaponShoot();
-       // ZoomInAndOut();
+       
     }
 
     void WeaponShoot()
@@ -56,13 +53,12 @@ public class PlayerAttack : MonoBehaviour
                 nextTimeToFire = Time.time + 1f / fireRate;
 
                 weaponManager.GetCurrentSelectedWeapon().ShootAnimation();
-                if (Physics.Raycast(fCamera.transform.position, fCamera.transform.forward, out RaycastHit raycastHit) && raycastHit.transform.tag == "Enemy")
+                if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out RaycastHit raycastHit) && raycastHit.transform.tag == "Enemy")
                 {
                     ennemyHealth = raycastHit.transform.gameObject.GetComponent<Damageable>();
                     ennemyHealth.InflictDamage(5, false, this.transform.gameObject);
                 }
 
-                //BulletFired();
             }
         }
         else
@@ -76,12 +72,11 @@ public class PlayerAttack : MonoBehaviour
                 if(weaponManager.GetCurrentSelectedWeapon().bulletType == WeaponBulletType.BULLET)
                 {
                     weaponManager.GetCurrentSelectedWeapon().ShootAnimation();
-                    if (Physics.Raycast(fCamera.transform.position, fCamera.transform.forward, out RaycastHit raycastHit) && raycastHit.transform.tag == "Enemy")
+                    if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out RaycastHit raycastHit) && Vector3.Distance(transform.position, raycastHit.point) <= 20f && raycastHit.transform.tag == "Enemy")
                     {
                         ennemyHealth = raycastHit.transform.gameObject.GetComponent<Damageable>();
                         ennemyHealth.InflictDamage(20, false, this.transform.gameObject);
                     }
-                    //BulletFired();
                 }
                 
 
@@ -100,7 +95,6 @@ public class PlayerAttack : MonoBehaviour
                 zoomCameraAnim.Play(AnimationTags.ZOOM_IN_ANIM);
                 crosshair.SetActive(false);
 
-                //zoomed = true;
             }
             if (Input.GetMouseButtonUp(1))
             {

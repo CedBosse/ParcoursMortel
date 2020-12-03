@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class Health : MonoBehaviour
     public UnityAction onDie;
     [SerializeField] private LevelHandler levelHandler;
     [SerializeField] private HeartManager healthManager;
+
 
     public float currentHealth { get; set; }
     public bool invincible { get; set; }
@@ -44,7 +47,6 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage, GameObject damageSource)
     {
-        Debug.Log("you took" + damage + "you had" + currentHealth);
         if (invincible)
             return;
 
@@ -89,11 +91,17 @@ public class Health : MonoBehaviour
         {
             if (onDie != null)
             {
-                if(this.transform.gameObject.tag == "Enemy")
+                if (this.transform.gameObject.tag == "Enemy")
                 {
                     m_IsDead = true;
                     onDie.Invoke();
                     PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 20);
+                }
+                else if (transform.gameObject.tag == "Boss")
+                {
+                    m_IsDead = true;
+                    onDie.Invoke();
+                    PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 100);                   
                 }
                 else
                 {
@@ -106,4 +114,5 @@ public class Health : MonoBehaviour
             
         }
     }
+
 }

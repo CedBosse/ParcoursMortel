@@ -25,7 +25,10 @@ public class LevelHandler : MonoBehaviour
     public float transitionTime = 1f;
     private int counter = 0;
 
-
+    private void Awake()
+    {
+        counter = 0;
+    }
     public void CheckIfDead()
     {
         isTouchingGround = Physics.Raycast(transform.position, -orientation.up, 1f, deathTerrain);

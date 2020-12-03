@@ -25,6 +25,7 @@ public class InGameMenuManager : MonoBehaviour
     PlayerInputHandler m_PlayerInputsHandler;
     Health m_PlayerHealth;
     FramerateCounter m_FramerateCounter;
+    public GameObject levelCanvas;
 
     void Start()
     {
@@ -161,5 +162,9 @@ public class InGameMenuManager : MonoBehaviour
     public void OnShowControlButtonClicked(bool show)
     {
         controlImage.SetActive(show);
+    }
+    public void OnLevelExitClick(bool close)
+    {
+        levelCanvas.SetActive(close);
     }
 }

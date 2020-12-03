@@ -22,11 +22,11 @@ public class GameOverTransition : MonoBehaviour
 
     public void Recommencer()
     {
-        StartCoroutine(LoadLevel(4));
+        StartCoroutine(LoadLevel(1));
     }
 
     public void MainMenu()
     {
-        StartCoroutine(LoadLevel(9));
+        StartCoroutine(LoadLevel(0));
     }
 }
