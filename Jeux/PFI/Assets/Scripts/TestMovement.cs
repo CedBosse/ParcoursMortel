@@ -5,49 +5,24 @@ using UnityEngine;
 public class TestMovement : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float jumpForce = 2f;
-    [SerializeField] private Rigidbody rb;
-    private int jumpCounter = 0;
+    [SerializeField] private Animator anim;
+
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        TestInput();
-        Jump();
-    }
-    void TestInput()
-    {
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            transform.position = new Vector3(transform.position.x + 0.005f, transform.position.y, transform.position.z);
-            transform.rotation = Quaternion.Euler(transform.eulerAngles.x, 90, transform.eulerAngles.z);
+            anim.SetTrigger("Smash");
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.X))
         {
-            transform.position = new Vector3(transform.position.x - 0.005f, transform.position.y, transform.position.z);
-            transform.rotation = Quaternion.Euler(transform.eulerAngles.x, -90, transform.eulerAngles.z);
-        }
-    }
-    void Jump()
-    {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if (jumpCounter < 2)
-            {
-                Debug.Log("YO");
-                rb.AddForce(jumpForce * Vector3.up);
-                jumpCounter++;
-            }
-            else
-            {
-                jumpCounter = 0;
-            }
-
+            anim.SetTrigger("Kick");
         }
     }
 
