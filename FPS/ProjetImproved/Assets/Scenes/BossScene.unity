@@ -231,8 +231,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57545324}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -10.6, y: 43.8, z: 6.1}
-  m_LocalScale: {x: 100, y: 30, z: 0.1}
+  m_LocalPosition: {x: -10.6, y: 43.8, z: 6.13}
+  m_LocalScale: {x: 100.05985, y: 30, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 15
@@ -2517,8 +2517,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915490728}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.643, y: 43.8, z: 56.23}
-  m_LocalScale: {x: 34.492004, y: 30, z: 0.1}
+  m_LocalPosition: {x: 6.43, y: 43.8, z: 56.23}
+  m_LocalScale: {x: 34.918514, y: 30, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 19
@@ -3182,6 +3182,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 2945293111239294053, guid: 22d2cdcba01176140ae76eff29955915,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b62711e5b70a2b04e9a7cac60696b72f, type: 3}
+    - target: {fileID: 2945293111239294053, guid: 22d2cdcba01176140ae76eff29955915,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 3678429111308064915, guid: 22d2cdcba01176140ae76eff29955915,
         type: 3}

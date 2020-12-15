@@ -102,6 +102,9 @@ Le joueur sera t-il capable d'aller le plus vite possible à la fin en évitant 
 <div class="mt-3 mb-3">
   <h3>Projet supervisé par Kyle Ross.</h3>
 </div>
+<div class="mt-3 mb-3">
+  <h3>Lien de téléchargement: <a href="http://www.mediafire.com/file/wr0fx7pxd316wa9/Parcours_Mortel_Final_Release.zip/file">Parcours Mortel</a></h3>
+</div>
 
 <div class="mt-3 mb-3">
   <h3>Voici une petite démonstration: <a href="https://www.youtube.com/watch?v=0BhR3xv-Pac&ab_channel=DylannFontus">https://www.youtube.com/watch?v=0BhR3xv-Pac&ab_channel=DylannFontus</a></h3>

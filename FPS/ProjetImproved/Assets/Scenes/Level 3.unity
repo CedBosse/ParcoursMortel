@@ -2240,6 +2240,10 @@ PrefabInstance:
       propertyPath: m_NavMeshLayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1256858306203008, guid: 93acc49b5a9f4e84b89aa62e0282a2a3, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4156798437703472, guid: 93acc49b5a9f4e84b89aa62e0282a2a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 165.56055
@@ -14322,6 +14326,16 @@ PrefabInstance:
       propertyPath: healthManager
       value: 
       objectReference: {fileID: 1782598794}
+    - target: {fileID: 2945293111239294053, guid: 22d2cdcba01176140ae76eff29955915,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1248f1b70c5f6ac4b8bd0ab70b4394fa, type: 3}
+    - target: {fileID: 2945293111239294053, guid: 22d2cdcba01176140ae76eff29955915,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4351701330175589143, guid: 22d2cdcba01176140ae76eff29955915,
         type: 3}
       propertyPath: hookShotTransform
@@ -14370,7 +14384,7 @@ PrefabInstance:
     - target: {fileID: 4905474247361581332, guid: 22d2cdcba01176140ae76eff29955915,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 89399
+      value: 122167
       objectReference: {fileID: 0}
     - target: {fileID: 5641687075825639484, guid: 22d2cdcba01176140ae76eff29955915,
         type: 3}

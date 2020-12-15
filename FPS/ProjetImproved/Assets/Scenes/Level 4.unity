@@ -804,6 +804,16 @@ PrefabInstance:
       propertyPath: healthManager
       value: 
       objectReference: {fileID: 288957019}
+    - target: {fileID: 2945293111239294053, guid: 22d2cdcba01176140ae76eff29955915,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9f76854eef6adba488dee1aefbc3a48e, type: 3}
+    - target: {fileID: 2945293111239294053, guid: 22d2cdcba01176140ae76eff29955915,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4228451464521006589, guid: 22d2cdcba01176140ae76eff29955915,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1396,7 +1406,7 @@ PrefabInstance:
     - target: {fileID: 6389168477544306669, guid: 1555b8b5c8f71ad4a80542f9d8ab742a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.9891663
+      value: -2.4
       objectReference: {fileID: 0}
     - target: {fileID: 6389168477544306669, guid: 1555b8b5c8f71ad4a80542f9d8ab742a,
         type: 3}
@@ -2499,7 +2509,7 @@ PrefabInstance:
     - target: {fileID: 6389168477544306669, guid: 1555b8b5c8f71ad4a80542f9d8ab742a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.9891663
+      value: -1.25
       objectReference: {fileID: 0}
     - target: {fileID: 6389168477544306669, guid: 1555b8b5c8f71ad4a80542f9d8ab742a,
         type: 3}

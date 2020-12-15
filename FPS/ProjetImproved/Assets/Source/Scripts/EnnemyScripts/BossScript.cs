@@ -55,6 +55,6 @@ public class BossScript : MonoBehaviour
     {
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene(7);
+        SceneManager.LoadScene(8);
     }
 }
