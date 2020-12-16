@@ -31,7 +31,7 @@ public class TestMovement : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-         // collider.enabled = true;
+          collider.enabled = true;
     }
     private void Phase()
     {

@@ -5,12 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(Mesh))]
 public class planeMeshDeformComponent : MonoBehaviour
 {
-    public int amplitude = 1;
+    public float amplitude = 1;
     private Vector3[] vertices;
     private PlanemeshGeneratorComponent plane;
     private Mesh mesh;
     private float elapsed = 0;
     public bool isMoving = false;
+    private float waveNumber = 2f;
+    private float randomReset = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,25 @@ public class planeMeshDeformComponent : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             GetComponent<MeshFilter>().mesh.vertices = AnimateZ(elapsed);
-        }       
+            GetComponent<MeshCollider>().sharedMesh = mesh;
+        }    
+        if(randomReset < 2)
+        {            
+            if(randomReset == 0)
+            {
+                waveNumber = Random.Range(1, 15);
+                randomReset += Time.deltaTime;
+            }
+            else
+            {
+                randomReset += Time.deltaTime;
+            }
+                
+        }
+        else
+        {
+            randomReset = 0;
+        }
     }
 
     private Vector3[] GenerateZ()
@@ -52,7 +72,7 @@ public class planeMeshDeformComponent : MonoBehaviour
 
     private Vector3[] AnimateZ(float time)
     {
-        float intervalX = (2 * Mathf.PI) / plane.nRows;
+        float intervalX = (waveNumber * Mathf.PI) / plane.nRows;
         float z;
 
         for (int i = 0; i < plane.nRows; i++)
