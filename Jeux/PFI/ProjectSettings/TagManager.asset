@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Punch
   - Kick
+  - Phaseable
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - 
   - 
   - Punch
-  - 
-  - 
+  - Ennemy
+  - Trampoline
   - 
   - 
   - 
