@@ -14,15 +14,30 @@ public class PlanemeshGeneratorComponent : MonoBehaviour
     private Queue<int> triangles;
     private Queue<Vector2> uvs;
     [SerializeField] private MeshCollider collider;
+    private Mesh meshToDeform;
+    private Vector3[] originalVertices, displacedVertices;
+    private Vector3[] vertexVelocities;
 
     // Start is called before the first frame update
     void Awake()
-    {
+    {       
         flagVertices = new Queue<Vector3>();
         uvs = new Queue<Vector2>();
         triangles = new Queue<int>();
         GetComponent<MeshFilter>().mesh = CreateFlagMesh();
         collider.sharedMesh = CreateFlagMesh();
+       
+    }
+    private void Start()
+    {
+        meshToDeform = CreateFlagMesh();
+        originalVertices = meshToDeform.vertices;
+        displacedVertices = new Vector3[originalVertices.Length];
+        for (int i = 0; i < originalVertices.Length; i++)
+        {
+            displacedVertices[i] = originalVertices[i];
+        }
+        vertexVelocities = new Vector3[originalVertices.Length];
     }
 
     // Update is called once per frame
@@ -30,7 +45,12 @@ public class PlanemeshGeneratorComponent : MonoBehaviour
     {
         
     }
-
+    private void UpdateVertex() { }
+    private void HandleHit()
+    {
+        RaycastHit hit;
+        if()
+    }
     private Mesh CreateFlagMesh()
     {
         RemplirQueue();
