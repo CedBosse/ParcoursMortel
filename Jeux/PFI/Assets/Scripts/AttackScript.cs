@@ -29,11 +29,10 @@ public class AttackScript : MonoBehaviour
 
             if (rb.rotation.y < 0)
             {
-                Debug.Log("tititcroissant");
-                rb.AddForce(-force, 0, 0, ForceMode.Impulse);
+                rb.AddForce(-force, 150, 0, ForceMode.Impulse);
             }               
             else
-                rb.AddForce(force, 0, 0, ForceMode.Impulse);
+                rb.AddForce(force, 150, 0, ForceMode.Impulse);
            
             ennemyHp.TakeDamage(damage);          
             gameObject.SetActive(false);
