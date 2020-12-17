@@ -9,6 +9,13 @@ public class AttackScript : MonoBehaviour
     public LayerMask layerMask;
     public AudioSource hitSound;
     [SerializeField] EnemyHealth ennemyHp;
+    private Rigidbody rb;
+    [SerializeField] private Transform targetPosition;
+
+    private void Awake()
+    {
+        rb = targetPosition.GetComponent<Rigidbody>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -17,9 +24,10 @@ public class AttackScript : MonoBehaviour
 
         if(hits.Length > 0)
         {
+            Vector3 direction = (targetPosition.position - transform.position);
             hitSound.Play(); ;
-            Debug.Log("We touched " + hits[0].gameObject.tag);
             ennemyHp.TakeDamage(damage);
+            rb.AddRelativeForce(direction * 500);
             gameObject.SetActive(false);
         }
     }
