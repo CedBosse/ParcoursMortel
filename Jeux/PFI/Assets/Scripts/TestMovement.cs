@@ -39,9 +39,7 @@ public class TestMovement : MonoBehaviour
         {
             if(hit.transform.tag == "Phaseable")
             {
-                platform = hit.transform.gameObject;
-                //
-                
+                platform = hit.transform.gameObject;               
             }
             
         }

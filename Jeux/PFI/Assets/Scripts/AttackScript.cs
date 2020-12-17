@@ -11,6 +11,7 @@ public class AttackScript : MonoBehaviour
     [SerializeField] EnemyHealth ennemyHp;
     private Rigidbody rb;
     [SerializeField] private Transform targetPosition;
+    private float force = 250;
 
     private void Awake()
     {
@@ -24,10 +25,17 @@ public class AttackScript : MonoBehaviour
 
         if(hits.Length > 0)
         {
-            Vector3 direction = (targetPosition.position - transform.position);
             hitSound.Play(); ;
-            ennemyHp.TakeDamage(damage);
-            rb.AddRelativeForce(direction * 500);
+
+            if (rb.rotation.y < 0)
+            {
+                Debug.Log("tititcroissant");
+                rb.AddForce(-force, 0, 0, ForceMode.Impulse);
+            }               
+            else
+                rb.AddForce(force, 0, 0, ForceMode.Impulse);
+           
+            ennemyHp.TakeDamage(damage);          
             gameObject.SetActive(false);
         }
     }
