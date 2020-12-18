@@ -12257,6 +12257,7 @@ MonoBehaviour:
   hitSound: {fileID: 1378986761}
   ennemyHp: {fileID: 1401743919}
   targetPosition: {fileID: 1401743911}
+  hitter: {fileID: 1475108608}
 --- !u!135 &1166356028
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -13784,6 +13785,7 @@ MonoBehaviour:
   hitSound: {fileID: 1652878964}
   ennemyHp: {fileID: 1475108611}
   targetPosition: {fileID: 1475108608}
+  hitter: {fileID: 1401743911}
 --- !u!1 &1496082017
 GameObject:
   m_ObjectHideFlags: 0
@@ -14557,6 +14559,7 @@ MonoBehaviour:
   hitSound: {fileID: 1090624970}
   ennemyHp: {fileID: 1475108611}
   targetPosition: {fileID: 1475108608}
+  hitter: {fileID: 1401743911}
 --- !u!1 &1864525279
 GameObject:
   m_ObjectHideFlags: 0

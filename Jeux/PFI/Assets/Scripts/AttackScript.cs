@@ -12,6 +12,7 @@ public class AttackScript : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private Transform targetPosition;
     private float force = 250;
+    [SerializeField] private Transform hitter;
 
     private void Awake()
     {
@@ -27,12 +28,12 @@ public class AttackScript : MonoBehaviour
         {
             hitSound.Play(); ;
 
-            if (rb.rotation.y < 0)
+            if (hitter.rotation.y < 0)
             {
-                rb.AddForce(-force, 150, 0, ForceMode.Impulse);
+                rb.AddForce(-force, 0, 0, ForceMode.Impulse);
             }               
             else
-                rb.AddForce(force, 150, 0, ForceMode.Impulse);
+                rb.AddForce(force, 0, 0, ForceMode.Impulse);
            
             ennemyHp.TakeDamage(damage);          
             gameObject.SetActive(false);
